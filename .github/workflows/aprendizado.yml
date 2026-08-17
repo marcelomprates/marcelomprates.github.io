@@ -1,0 +1,49 @@
+name: Gerar log de aprendizado
+
+# Roda a cada push na main. Lê o histórico, extrai os blocos "Aprendi:" das
+# mensagens de commit e regenera aprendizado.html. Nada precisa ser feito
+# à mão — nem clonar o repo, nem rodar script local.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # permite rodar na mão pelo botão "Run workflow"
+
+permissions:
+  contents: write           # necessário para commitar a página gerada de volta
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o repositório com o histórico completo
+        uses: actions/checkout@v4
+        with:
+          # sem isso o checkout traz só o último commit e o git log fica vazio
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Gerar aprendizado.html
+        run: python3 gerar-aprendizado.py
+
+      - name: Publicar se mudou
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Se o arquivo não mudou, não faz commit — evita histórico poluído
+          if git diff --quiet -- aprendizado.html; then
+            echo "Nada mudou. Nenhum commit necessário."
+            exit 0
+          fi
+
+          git add aprendizado.html
+          # [skip ci] impede que este commit dispare o workflow de novo,
+          # o que criaria um laço infinito de builds
+          git commit -m "chore: atualiza log de aprendizado [skip ci]"
+          git push
