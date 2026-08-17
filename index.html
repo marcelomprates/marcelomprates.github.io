@@ -54,6 +54,65 @@
     })();
   </script>
 
+
+  <!-- Dados estruturados: diz ao Google e ao LinkedIn que esta página é uma
+       PESSOA, não um site genérico. Resolve o "No author found" do inspector.
+       Só afirmações verificáveis aqui — nada de título ou formação inflada. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://marcelomprates.github.io/#marcelo",
+        "name": "Marcelo de Morais Prates",
+        "alternateName": "Marcelo Prates",
+        "jobTitle": "Desenvolvedor Full Stack",
+        "email": "marcelomprates@gmail.com",
+        "url": "https://marcelomprates.github.io/",
+        "image": "https://marcelomprates.github.io/og-image.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Guarulhos",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "knowsAbout": [
+          "Desenvolvimento full stack",
+          "Integração de sistemas",
+          "Automação de processos",
+          "Inteligência artificial aplicada",
+          "Python", "TypeScript", "JavaScript", "React", "Node.js", "Docker"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "ETEP Faculdades"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/marcelo-de-morais-prates",
+          "https://github.com/marcelomprates"
+        ],
+        "worksFor": { "@id": "https://marcelomprates.github.io/#digitaldroids" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://marcelomprates.github.io/#digitaldroids",
+        "name": "Digital Droids",
+        "url": "https://marcelomprates.github.io/",
+        "logo": "https://marcelomprates.github.io/droid.svg",
+        "founder": { "@id": "https://marcelomprates.github.io/#marcelo" },
+        "description": "Desenvolvimento, automação e integração de sistemas."
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://marcelomprates.github.io/",
+        "name": "Marcelo Prates | Desenvolvedor Full Stack",
+        "inLanguage": "pt-BR",
+        "publisher": { "@id": "https://marcelomprates.github.io/#marcelo" }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
