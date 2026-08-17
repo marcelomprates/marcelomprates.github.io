@@ -23,21 +23,27 @@ document.addEventListener('DOMContentLoaded', function () {
   const temaSalvo = localStorage.getItem('tema');
   if (temaSalvo === 'dark') {
     html.setAttribute('data-theme', 'dark');
-    iconeTema.textContent = '☀';
+    if (iconeTema) iconeTema.textContent = '☀';
   }
 
-  botaoTema.addEventListener('click', function () {
-    const ehEscuro = html.getAttribute('data-theme') === 'dark';
-    if (ehEscuro) {
-      html.removeAttribute('data-theme');   // volta ao tema claro
-      iconeTema.textContent = '◐';
-      localStorage.setItem('tema', 'light');
-    } else {
-      html.setAttribute('data-theme', 'dark');  // ativa tema escuro
-      iconeTema.textContent = '☀';
-      localStorage.setItem('tema', 'dark');
-    }
-  });
+  // IMPORTANTE: este mesmo script.js roda também nas páginas de estudo de caso,
+  // que não têm todos os elementos da home. Sem estas guardas de null, o primeiro
+  // getElementById que voltasse vazio lançaria TypeError e derrubaria TODO o resto
+  // do arquivo — inclusive o formulário e o ano do rodapé.
+  if (botaoTema) {
+    botaoTema.addEventListener('click', function () {
+      const ehEscuro = html.getAttribute('data-theme') === 'dark';
+      if (ehEscuro) {
+        html.removeAttribute('data-theme');   // volta ao tema claro
+        if (iconeTema) iconeTema.textContent = '◐';
+        localStorage.setItem('tema', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');  // ativa tema escuro
+        if (iconeTema) iconeTema.textContent = '☀';
+        localStorage.setItem('tema', 'dark');
+      }
+    });
+  }
 
   /* ------------------------------------------------------------------
      2. MENU RESPONSIVO (HAMBURGUER)
@@ -45,22 +51,24 @@ document.addEventListener('DOMContentLoaded', function () {
   const navToggle = document.getElementById('navToggle');
   const navLista = document.getElementById('navLista');
 
-  navToggle.addEventListener('click', function () {
-    const aberto = navLista.classList.toggle('aberto');
-    navToggle.classList.toggle('ativo');
-    // Atualiza acessibilidade
-    navToggle.setAttribute('aria-expanded', aberto);
-    navToggle.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
-  });
-
-  // Fecha o menu ao clicar em qualquer link (melhora a experiência no mobile)
-  document.querySelectorAll('.nav__link').forEach(function (link) {
-    link.addEventListener('click', function () {
-      navLista.classList.remove('aberto');
-      navToggle.classList.remove('ativo');
-      navToggle.setAttribute('aria-expanded', false);
+  if (navToggle && navLista) {
+    navToggle.addEventListener('click', function () {
+      const aberto = navLista.classList.toggle('aberto');
+      navToggle.classList.toggle('ativo');
+      // Atualiza acessibilidade
+      navToggle.setAttribute('aria-expanded', aberto);
+      navToggle.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
     });
-  });
+
+    // Fecha o menu ao clicar em qualquer link (melhora a experiência no mobile)
+    document.querySelectorAll('.nav__link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLista.classList.remove('aberto');
+        navToggle.classList.remove('ativo');
+        navToggle.setAttribute('aria-expanded', false);
+      });
+    });
+  }
 
   /* ------------------------------------------------------------------
      3. VALIDAÇÃO DO FORMULÁRIO DE CONTATO
@@ -88,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return padrao.test(email);
   }
 
-  form.addEventListener('submit', function (evento) {
+  if (form) form.addEventListener('submit', function (evento) {
     evento.preventDefault();   // impede o envio padrão do navegador
     let valido = true;
 
@@ -192,27 +200,32 @@ document.addEventListener('DOMContentLoaded', function () {
   const fecharModalBtn = document.getElementById('fecharModal');
 
   function abrirModal() {
+    if (!modal) return;
     modal.classList.add('ativo');
     modal.setAttribute('aria-hidden', 'false');
   }
   function fecharModal() {
+    if (!modal) return;
     modal.classList.remove('ativo');
     modal.setAttribute('aria-hidden', 'true');
   }
 
-  fecharModalBtn.addEventListener('click', fecharModal);
-  // Fecha ao clicar fora da caixa do modal
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) fecharModal();
-  });
-  // Fecha com a tecla ESC (acessibilidade)
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') fecharModal();
-  });
+  if (modal && fecharModalBtn) {
+    fecharModalBtn.addEventListener('click', fecharModal);
+    // Fecha ao clicar fora da caixa do modal
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) fecharModal();
+    });
+    // Fecha com a tecla ESC (acessibilidade)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') fecharModal();
+    });
+  }
 
   /* ------------------------------------------------------------------
-     5. ANO AUTOMÁTICO NO RODAPÉ
+     5. ANO AUTOMÁTICO NO RODAPÉ (existe em todas as páginas)
      ------------------------------------------------------------------ */
-  document.getElementById('ano').textContent = new Date().getFullYear();
+  const ano = document.getElementById('ano');
+  if (ano) ano.textContent = new Date().getFullYear();
 
 });

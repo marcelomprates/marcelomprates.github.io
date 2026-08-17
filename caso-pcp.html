@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+  Estudo de caso: PCP Embalagem
+  Código proprietário do empregador — esta página descreve o PROBLEMA, as
+  DECISÕES e o APRENDIZADO, nunca detalhe de infra interna, dado de cliente,
+  preço ou pedido real.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estudo de caso: sistema de Planejamento e Controle de Produção para a indústria de embalagens — do comercial ao chão de fábrica.">
+  <title>PCP Embalagem | Marcelo Prates</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PCP Embalagem — estudo de caso">
+  <meta property="og:description" content="Planejamento e Controle de Produção do comercial ao chão de fábrica, numa indústria que operava em planilhas.">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <header class="cabecalho">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+      <ul class="nav__lista" id="navLista">
+        <li><a href="index.html#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="caso">
+    <article class="caso__interno">
+      <a href="index.html#portfolio" class="caso__voltar">← voltar ao portfólio</a>
+
+      <p class="eyebrow">// estudo de caso</p>
+      <h1 class="caso__titulo">PCP Embalagem</h1>
+      <p class="caso__resumo">
+        Sistema de Planejamento e Controle de Produção para uma indústria de embalagens —
+        do CRM e orçamento ao chão de fábrica, estoque e logística. Substituiu um conjunto
+        de planilhas que tinha virado a memória operacional da empresa.
+      </p>
+
+      <div class="caso__meta">
+        <span><strong>Papel:</strong> desenvolvedor full stack</span>
+        <span><strong>Stack:</strong> Python · React · Firebase · Docker · Coolify</span>
+        <span><strong>Status:</strong> em produção</span>
+        <span><strong>Código:</strong> 🔒 privado</span>
+      </div>
+
+      <h2>O problema</h2>
+      <p>
+        A operação funcionava em planilhas. Não é uma crítica — planilhas funcionam, e é
+        exatamente por isso que elas se espalham. O problema aparece depois: quando a
+        regra de negócio mora em fórmulas que só uma pessoa entende, quando duas versões
+        do mesmo arquivo divergem, e quando ninguém consegue responder "qual é o estado
+        real da produção agora?" sem abrir cinco arquivos.
+      </p>
+      <p>
+        O desafio não era técnico no sentido de algoritmo difícil. Era de
+        <strong>domínio</strong>: entender o processo real, incluindo as exceções que
+        ninguém documenta porque "todo mundo sabe".
+      </p>
+
+      <div class="rascunho">
+        Marcelo — aqui vale um parágrafo com o gatilho concreto: o que quebrou, ou que
+        pergunta ninguém conseguia responder, que fez o projeto começar. Uma cena
+        específica vale mais que dez linhas de contexto genérico. Sem nome de cliente,
+        número de pedido ou valor.
+      </div>
+
+      <h2>O que foi construído</h2>
+      <p>
+        Um sistema único cobrindo o fluxo de ponta a ponta, em vez de uma ferramenta por
+        setor. As áreas principais:
+      </p>
+      <ul>
+        <li><strong>Comercial</strong> — CRM e orçamentos, com o histórico do cliente no mesmo lugar</li>
+        <li><strong>Produção</strong> — planejamento e acompanhamento do que está no chão de fábrica</li>
+        <li><strong>Insumos e almoxarifado</strong> — controle de matéria-prima com rastreio de entrada e consumo</li>
+        <li><strong>Estoque e logística</strong> — do produto acabado à expedição</li>
+      </ul>
+      <p>
+        Deploy containerizado com Docker, orquestrado via Coolify — o que permite subir
+        versão sem depender de janela de manutenção manual.
+      </p>
+
+      <div class="rascunho">
+        Vale detalhar aqui a parte que você mais gosta tecnicamente — o scanner no chão de
+        fábrica, a migração das planilhas, o FIFO de insumos. Escolha UMA e conte bem,
+        em vez de listar tudo por cima. Lembrando: sem detalhe de infra interna,
+        credencial ou arquitetura sensível.
+      </div>
+
+      <h2>Decisões que valeram a pena</h2>
+
+      <h3>Migrar por setor, não de uma vez</h3>
+      <p>
+        Trocar todo o sistema de uma vez é o caminho mais rápido para o projeto ser
+        rejeitado. Habilitar um setor por vez permite que cada grupo aprenda no seu
+        ritmo, e que o erro apareça pequeno.
+      </p>
+
+      <h3>A planilha como especificação, não como inimiga</h3>
+      <p>
+        As planilhas antigas eram a documentação mais honesta que existia do processo —
+        incluindo as gambiarras. Lê-las com cuidado antes de modelar economizou muita
+        reescrita.
+      </p>
+
+      <div class="rascunho">
+        Adicione uma decisão que você tomou e que <em>não</em> deu certo, e o que fez
+        depois. Isso é o que separa um estudo de caso de um folheto — e é o que um
+        entrevistador técnico mais valoriza.
+      </div>
+
+      <!-- ============ O CORAÇÃO: log de aprendizado ============ -->
+      <div class="aprendi">
+        <h2>O que eu precisei saber para construir isso</h2>
+        <p>
+          A ideia aqui não é listar tecnologia, e sim os conceitos que o projeto me
+          obrigou a entender de verdade.
+        </p>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">modelagem de domínio</span>
+          Antes de qualquer tabela, entender o que é uma "ordem" nesse negócio, o que a
+          torna válida e como ela muda de estado. Errar o modelo custa mais do que errar
+          qualquer linha de código depois.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">máquina de estados</span>
+          Produção é sequência de estados com transições permitidas e proibidas. Tratar
+          isso explicitamente evita a categoria de bug mais cara: o registro que chegou
+          num estado impossível e ninguém sabe como.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">containers e deploy reprodutível</span>
+          Docker deixou de ser "empacotar a aplicação" e virou a garantia de que o que
+          roda em produção é o que foi testado. Coolify tirou o deploy do território do
+          ritual manual.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">software com usuário real tem outro custo de erro</span>
+          Um bug num projeto de estudo custa tempo. Um bug num sistema de produção para
+          a linha. Isso muda o que você considera "pronto".
+        </div>
+
+        <div class="rascunho">
+          Acrescente 2 ou 3 conceitos que <em>você</em> teve que ir estudar por causa
+          desse projeto — inclusive os que parecem básicos. O valor deste bloco está na
+          honestidade, não na sofisticação.
+        </div>
+      </div>
+
+      <h2>Onde estou hoje</h2>
+      <div class="rascunho">
+        Uma linha sobre o estado atual e o que vem a seguir no sistema. Fecha o caso
+        mostrando que é coisa viva, não um projeto congelado no portfólio.
+      </div>
+
+      <p style="margin-top:2.5rem">
+        <a href="index.html#contato" class="btn btn--primario">Falar sobre um projeto assim</a>
+      </p>
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <p class="rodape__marca"><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

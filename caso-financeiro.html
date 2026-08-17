@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+  Estudo de caso: Controle Financeiro com IA
+  Projeto pessoal. Repo pode ser aberto — antes disso, revisar TODO o histórico
+  de commits em busca de chave da Gemini e credencial do Firebase.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estudo de caso: API de controle financeiro com leitura de NFC-e por QR Code e análise de gastos com Gemini.">
+  <title>Controle Financeiro com IA | Marcelo Prates</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Controle Financeiro com IA — estudo de caso">
+  <meta property="og:description" content="Da nota fiscal no QR Code ao relatório mensal, com LLM fazendo a parte que planilha não faz.">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <header class="cabecalho">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+      <ul class="nav__lista" id="navLista">
+        <li><a href="index.html#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="caso">
+    <article class="caso__interno">
+      <a href="index.html#portfolio" class="caso__voltar">← voltar ao portfólio</a>
+
+      <p class="eyebrow">// estudo de caso · projeto pessoal</p>
+      <h1 class="caso__titulo">Controle Financeiro com IA</h1>
+      <p class="caso__resumo">
+        API que lê a nota fiscal pelo QR Code da NFC-e, organiza os gastos e usa um LLM
+        para produzir um relatório mensal com análise e sugestões. Nasceu de uma coceira
+        pessoal: saber pra onde o dinheiro vai sem digitar nada.
+      </p>
+
+      <div class="caso__meta">
+        <span><strong>Papel:</strong> projeto pessoal, ponta a ponta</span>
+        <span><strong>Stack:</strong> Python · FastAPI · Firestore · Gemini</span>
+        <span><strong>Código:</strong> repo em revisão para abertura</span>
+      </div>
+
+      <h2>O problema</h2>
+      <p>
+        Todo app de finanças pessoais morre no mesmo ponto: <strong>a digitação</strong>.
+        Você usa por duas semanas, esquece de lançar três compras, os números param de
+        bater, e aí não faz mais sentido continuar. O gargalo nunca foi a análise — foi
+        a entrada de dados.
+      </p>
+      <p>
+        Só que toda nota fiscal de consumidor no Brasil já vem com um QR Code que aponta
+        para os dados estruturados da compra. A informação existe. Só não estava sendo
+        usada.
+      </p>
+
+      <h2>O que foi construído</h2>
+      <ul>
+        <li><strong>Leitura de NFC-e por QR Code</strong> — a compra entra sem digitação manual</li>
+        <li><strong>Persistência no Firestore</strong> — histórico consultável</li>
+        <li><strong>API em FastAPI</strong> — as operações expostas de forma limpa</li>
+        <li><strong>Relatório mensal via Gemini</strong> — análise dos gastos e sugestões em linguagem natural</li>
+      </ul>
+
+      <h2>Onde a IA ajuda de verdade — e onde não</h2>
+      <p>
+        Este projeto foi bom pra calibrar isso. O LLM é excelente pra transformar uma
+        lista de transações numa leitura que faz sentido pra um humano: agrupar por
+        padrão, notar o que fugiu do normal, escrever num tom útil.
+      </p>
+      <p>
+        O que ele <strong>não</strong> deve fazer é somar. Cálculo é determinístico e
+        tem que ser código — não porque o modelo erre sempre, mas porque quando errar
+        você não tem como saber. A divisão que eu adotei:
+      </p>
+      <ul>
+        <li><strong>Código</strong> — extrair, somar, categorizar por regra, persistir</li>
+        <li><strong>LLM</strong> — interpretar, resumir, sugerir, escrever</li>
+      </ul>
+      <p>
+        É a mesma lógica do Vibe Coding aplicada ao produto: a IA acelera a parte
+        interpretativa, mas o número que aparece na tela sai de código auditável.
+      </p>
+
+      <div class="rascunho">
+        Marcelo — conte aqui uma vez em que o modelo te deu resposta plausível e errada,
+        e como você percebeu. Esse é o parágrafo mais valioso da página inteira: mostra
+        critério, não entusiasmo.
+      </div>
+
+      <!-- ============ O CORAÇÃO: log de aprendizado ============ -->
+      <div class="aprendi">
+        <h2>O que eu precisei saber para construir isso</h2>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">FastAPI e tipagem em Python</span>
+          Schemas explícitos deixaram de ser burocracia e viraram a primeira linha de
+          defesa contra dado malformado entrando no sistema.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">modelagem NoSQL</span>
+          Firestore não é tabela. Modelar pensando em como o dado vai ser lido, e não
+          em como ele se relaciona, exigiu desaprender o reflexo relacional.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">prompt como parte do sistema</span>
+          O prompt do relatório é código: versionado, testado com entradas reais, e
+          modificado com o mesmo cuidado de uma função. Prompt improvisado quebra em
+          silêncio.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">a fronteira determinístico × probabilístico</span>
+          Decidir explicitamente o que é cálculo e o que é interpretação. Foi a decisão
+          de arquitetura mais importante do projeto.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">gestão de segredo</span>
+          Chave de API não entra no repositório. Aprendi que isso vale para o
+          <em>histórico</em> também — um commit antigo com credencial continua público
+          para sempre, mesmo depois de removida do arquivo atual.
+        </div>
+
+        <div class="rascunho">
+          Acrescente o que mais te fez parar e estudar. Se algum conceito te custou um
+          fim de semana inteiro, ele merece estar aqui.
+        </div>
+      </div>
+
+      <h2>Próximo passo</h2>
+      <div class="rascunho">
+        O que vem: abrir o repositório (depois da revisão de segredos), interface,
+        ou o que você quiser levar adiante.
+      </div>
+
+      <p style="margin-top:2.5rem">
+        <a href="index.html#contato" class="btn btn--primario">Falar sobre IA aplicada</a>
+      </p>
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <p class="rodape__marca"><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

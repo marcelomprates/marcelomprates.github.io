@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+  Estudo de caso: Plataforma B2B
+  Código proprietário do empregador — descreve PROBLEMA, DECISÕES e APRENDIZADO.
+  Nada de infra interna, credencial, dado de cliente, preço ou pedido real.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estudo de caso: plataforma B2B de pedidos integrada ao Tiny ERP — tirando o pedido do WhatsApp e da planilha.">
+  <title>Plataforma B2B | Marcelo Prates</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Plataforma B2B — estudo de caso">
+  <meta property="og:description" content="Catálogo digital e pedidos de clientes integrados ao ERP, sem redigitação.">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <header class="cabecalho">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+      <ul class="nav__lista" id="navLista">
+        <li><a href="index.html#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="caso">
+    <article class="caso__interno">
+      <a href="index.html#portfolio" class="caso__voltar">← voltar ao portfólio</a>
+
+      <p class="eyebrow">// estudo de caso</p>
+      <h1 class="caso__titulo">Plataforma B2B</h1>
+      <p class="caso__resumo">
+        Plataforma de pedidos para clientes de uma indústria de embalagens, ligando o
+        catálogo digital ao ERP. O objetivo: o cliente faz o pedido sozinho, e ele chega
+        no sistema sem ninguém redigitar.
+      </p>
+
+      <div class="caso__meta">
+        <span><strong>Papel:</strong> desenvolvedor full stack</span>
+        <span><strong>Stack:</strong> Node.js · React · Tiny ERP API · Docker</span>
+        <span><strong>Status:</strong> em produção</span>
+        <span><strong>Código:</strong> 🔒 privado</span>
+      </div>
+
+      <h2>O problema</h2>
+      <p>
+        Pedido B2B costuma chegar por onde der: WhatsApp, e-mail, telefone, PDF. Alguém
+        do time interno lê, interpreta e digita no ERP. Esse passo humano é onde mora o
+        erro — item trocado, quantidade errada, pedido que ficou esquecido numa conversa.
+      </p>
+      <p>
+        E não é um problema de preguiça: é de <strong>interface</strong>. Enquanto o
+        caminho mais fácil pro cliente for mandar mensagem, ele vai mandar mensagem.
+        A plataforma só funciona se for mais conveniente que o WhatsApp.
+      </p>
+
+      <div class="rascunho">
+        Marcelo — descreva aqui, em uma cena, como o pedido chegava antes. Quanto tempo
+        levava, quantas mãos passava. É o contraste que faz o resto do caso valer.
+      </div>
+
+      <h2>O que foi construído</h2>
+      <ul>
+        <li><strong>Catálogo digital</strong> — o cliente vê o que existe, com a informação que importa pra ele</li>
+        <li><strong>Pedido self-service</strong> — montado pelo próprio cliente, sem intermediário</li>
+        <li><strong>Integração com o Tiny ERP</strong> — o pedido nasce já dentro do sistema que a operação usa</li>
+      </ul>
+      <p>
+        Empacotado em Docker, como o resto do ecossistema, para que subir versão não
+        dependa de configuração manual de servidor.
+      </p>
+
+      <h2>A parte difícil: integrar com sistema que você não controla</h2>
+      <p>
+        Integrar com uma API de terceiro é diferente de escrever o próprio backend. Você
+        herda decisões que não tomou: o formato dos dados, os limites de requisição, o
+        vocabulário do domínio, e o comportamento em caso de erro — que raramente está
+        documentado tão bem quanto o caminho feliz.
+      </p>
+      <p>
+        Duas coisas que aprendi a tratar como obrigatórias:
+      </p>
+      <ul>
+        <li>
+          <strong>Nunca confiar que a chamada deu certo porque retornou 200.</strong>
+          Verificar o efeito, não só a resposta.
+        </li>
+        <li>
+          <strong>Falhar alto.</strong> Integração que falha em silêncio é pior que
+          integração que não existe — porque todo mundo acha que está funcionando.
+        </li>
+      </ul>
+      <p>
+        Essa segunda lição, aliás, eu reaprendi construindo este próprio site: o
+        formulário de contato desta página exibia "mensagem enviada com sucesso" sem
+        enviar nada. Seis semanas. O mesmo erro, em escala menor.
+      </p>
+
+      <div class="rascunho">
+        Vale contar um caso concreto de comportamento inesperado da API do Tiny e como
+        você resolveu. Detalhe técnico específico é o que dá credibilidade — sem expor
+        credencial, endpoint interno ou dado de cliente.
+      </div>
+
+      <!-- ============ O CORAÇÃO: log de aprendizado ============ -->
+      <div class="aprendi">
+        <h2>O que eu precisei saber para construir isso</h2>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">consumo de API REST de terceiro</span>
+          Autenticação, paginação, limite de requisições, e o que fazer quando a resposta
+          não é a que a documentação prometeu.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">idempotência</span>
+          Se a mesma chamada sair duas vezes por causa de um retry, o cliente não pode
+          receber dois pedidos. Isso precisa ser desenhado, não torcido.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">tratamento de erro como funcionalidade</span>
+          O caminho de falha é parte do produto, não um detalhe. Quem descobre o erro,
+          como descobre, e o que consegue fazer a respeito.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">adoção é requisito, não consequência</span>
+          Um sistema B2B que o cliente não usa é código morto. A conveniência percebida
+          é tão parte da entrega quanto o backend.
+        </div>
+
+        <div class="rascunho">
+          Some aqui o que <em>você</em> teve que ir estudar por causa deste projeto.
+          Vale inclusive o que parece básico — é o que torna o log útil pra quem lê.
+        </div>
+      </div>
+
+      <h2>Onde estou hoje</h2>
+      <div class="rascunho">
+        Estado atual e próximo passo da plataforma.
+      </div>
+
+      <p style="margin-top:2.5rem">
+        <a href="index.html#contato" class="btn btn--primario">Falar sobre uma integração</a>
+      </p>
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <p class="rodape__marca"><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
