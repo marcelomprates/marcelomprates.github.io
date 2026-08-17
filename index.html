@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--
+  Portfólio Pessoal - Marcelo Prates
+  Atividade Prática - Fundamentos da Programação Web (UNINTER)
+  HTML5 semântico, CSS3 puro e JavaScript (sem frameworks)
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport para responsividade (mobile first) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio pessoal de Marcelo Prates - Gestor de TI e Desenvolvedor Full Stack - Vibe Coding.">
+  <title>Marcelo Prates | Portfólio</title>
+
+  <!-- Fontes do Google: display, corpo e monoespaçada (carregadas no navegador do visitante) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <!-- Folha de estilo externa -->
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <!-- ============================ CABEÇALHO / MENU FIXO ============================ -->
+  <!-- O menu fica fixo no topo e é visível em todas as seções da página -->
+  <header class="cabecalho" id="topo">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#topo" class="nav__logo">
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+
+      <!-- Botão hamburguer: aparece apenas no mobile, controlado por JavaScript -->
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__lista" id="navLista">
+        <li><a href="#sobre" class="nav__link">Sobre mim</a></li>
+        <li><a href="#formacao" class="nav__link">Formação</a></li>
+        <li><a href="#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="#contato" class="nav__link">Contato</a></li>
+        <!-- Botão de alternância de tema claro/escuro -->
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================ HERO / SOBRE MIM ============================ -->
+    <section class="hero" id="sobre">
+      <div class="hero__interno">
+        <p class="eyebrow"><span class="eyebrow__num">01</span> // sobre mim</p>
+        <h1 class="hero__titulo">
+          Marcelo Prates
+        </h1>
+        <p class="hero__papel">Gestor de TI &amp; Desenvolvedor Full Stack - Vibe Coding</p>
+        <p class="hero__texto">
+          Atuo na indústria de embalagens liderando a área de tecnologia e desenvolvendo
+          aplicações web de ponta a ponta. Hoje curso, em paralelo, Engenharia de Software
+          e Inteligência Artificial e Automação — unindo a prática do dia a dia com a base
+          teórica para construir soluções melhores.
+        </p>
+
+        <!-- Apresentação pessoal / hobbies -->
+        <p class="hero__texto">
+          Fora do trabalho, gosto de explorar novas tecnologias, automatizar processos do
+          cotidiano e acompanhar o avanço da IA aplicada a problemas reais.
+        </p>
+
+        <div class="hero__acoes">
+          <a href="#portfolio" class="btn btn--primario">Ver projetos</a>
+          <a href="#contato" class="btn btn--secundario">Falar comigo</a>
+        </div>
+
+        <!-- "Cartão de terminal" — elemento de assinatura que reforça a identidade de dev -->
+        <div class="terminal" aria-hidden="true">
+          <div class="terminal__barra">
+            <span></span><span></span><span></span>
+          </div>
+          <pre class="terminal__corpo"><code>$ whoami
+marcelo_prates
+$ cat stack.txt
+HTML5 · CSS3 · JavaScript · Full Stack · IA</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FORMAÇÃO ============================ -->
+    <section class="secao" id="formacao">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">02</span> // formação</p>
+        <h2 class="secao__titulo">Formação &amp; idiomas</h2>
+
+        <!-- Linha do tempo de formação acadêmica -->
+        <ol class="timeline">
+          <li class="timeline__item">
+            <span class="timeline__periodo">2025 — 2029 · em andamento</span>
+            <h3 class="timeline__cargo">Bacharelado em Engenharia de Software</h3>
+            <p class="timeline__local">Centro Universitário Internacional UNINTER</p>
+            <p class="timeline__desc">
+              Graduação focada em arquitetura de software, desenvolvimento web e mobile,
+              banco de dados e boas práticas de engenharia.
+            </p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__periodo">2026 — 2027 · em andamento</span>
+            <h3 class="timeline__cargo">Tecnólogo em Inteligência Artificial e Automação Digital</h3>
+            <p class="timeline__local">Faculdade Rocketseat</p>
+            <p class="timeline__desc">
+              Formação voltada a LLMs aplicados, agentes de voz e automação de
+              processos de negócio.
+            </p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__periodo">Concluído</span>
+            <h3 class="timeline__cargo">Técnico em Informática Industrial</h3>
+            <p class="timeline__local">ETEP Faculdades</p>
+            <p class="timeline__desc">
+              Base técnica em informática aplicada à indústria.
+            </p>
+          </li>
+        </ol>
+
+        <!-- Idiomas e competências -->
+        <div class="grade-skills">
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Idiomas</h3>
+            <ul class="lista-simples">
+              <li>Português — Nativo</li>
+              <li>Inglês — Técnico/Leitura</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Tecnologias</h3>
+            <ul class="tags">
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript</li>
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>React</li>
+              <li>Node.js</li>
+              <li>Docker</li>
+              <li>IA / LLMs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PORTFÓLIO ============================ -->
+    <section class="secao secao--alt" id="portfolio">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">03</span> // portfólio</p>
+        <h2 class="secao__titulo">Projetos &amp; trabalhos</h2>
+        <p class="secao__intro">
+          Uma seleção do que venho construindo entre o trabalho na indústria e os estudos.
+        </p>
+
+        <!-- Grade de cards de projetos -->
+        <div class="projetos">
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">Full Stack · Indústria</span>
+            </div>
+            <h3 class="projeto__titulo">PCP Embalagem</h3>
+            <p class="projeto__desc">
+              Sistema completo de Planejamento e Controle de Produção para a indústria de
+              embalagens — do CRM e orçamentos ao chão de fábrica, estoque e logística.
+              Deploy automatizado com Docker e Coolify.
+            </p>
+            <p class="projeto__stack">Python · React · Firebase · Docker</p>
+            <a href="https://github.com/marcelomprates" class="projeto__link" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </article>
+
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">Web · B2B</span>
+            </div>
+            <h3 class="projeto__titulo">Plataforma B2B Scuadra</h3>
+            <p class="projeto__desc">
+              Plataforma B2B para pedidos de clientes da Scuadra Embalagens, integrando o
+              catálogo digital ao Tiny ERP.
+            </p>
+            <p class="projeto__stack">Node.js · React · Tiny API · Docker</p>
+            <a href="https://github.com/marcelomprates" class="projeto__link" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </article>
+
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">IA · API</span>
+            </div>
+            <h3 class="projeto__titulo">Controle Financeiro com IA</h3>
+            <p class="projeto__desc">
+              API de controle financeiro com análise inteligente de gastos via Google
+              Gemini, leitura de NFC-e por QR Code e relatório mensal com sugestões.
+            </p>
+            <p class="projeto__stack">Python · FastAPI · Firestore · Gemini</p>
+            <a href="https://github.com/marcelomprates" class="projeto__link" target="_blank" rel="noopener">Ver no GitHub →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CONTATO ============================ -->
+    <section class="secao" id="contato">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">04</span> // contato</p>
+        <h2 class="secao__titulo">Vamos conversar</h2>
+        <p class="secao__intro">
+          Preencha o formulário abaixo. Os campos são validados antes do envio.
+        </p>
+
+        <!-- Formulário de contato com validação em JavaScript -->
+        <!-- novalidate desativa a validação nativa para usarmos a nossa em JS -->
+        <!-- Endpoint real do Formspree. O envio acontece no script.js via fetch. -->
+        <form class="form" id="formContato" action="https://formspree.io/f/mnjkvepe" method="POST" novalidate>
+          <div class="form__campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome completo">
+            <small class="form__erro" id="erroNome"></small>
+          </div>
+
+          <div class="form__campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@exemplo.com">
+            <small class="form__erro" id="erroEmail"></small>
+          </div>
+
+          <div class="form__campo">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..."></textarea>
+            <small class="form__erro" id="erroMensagem"></small>
+          </div>
+
+          <button type="submit" class="btn btn--primario btn--bloco" id="botaoEnviar">Enviar mensagem</button>
+          <!-- Mensagem de status (erros de envio) exibida via JavaScript -->
+          <p class="form__status" id="formStatus" role="alert"></p>
+        </form>
+
+        <!-- Canais diretos de contato -->
+        <ul class="contato-direto">
+          <li><strong>E-mail:</strong> <a href="mailto:marcelomprates@gmail.com">marcelomprates@gmail.com</a></li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marcelo-de-morais-prates" target="_blank" rel="noopener">marcelo-de-morais-prates</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/marcelomprates" target="_blank" rel="noopener">@marcelomprates</a></li>
+          <li><strong>Local:</strong> Guarulhos, São Paulo</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ RODAPÉ ============================ -->
+  <footer class="rodape">
+    <p>© <span id="ano"></span> Marcelo Prates — Construído com HTML5, CSS3 e JavaScript.</p>
+  </footer>
+
+  <!-- ============================ MODAL DE SUCESSO ============================ -->
+  <!-- Exibido por JavaScript somente após o Formspree confirmar o envio -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal__caixa">
+      <span class="modal__icone">✓</span>
+      <h3 class="modal__titulo">Mensagem enviada com sucesso!</h3>
+      <p class="modal__texto">Obrigado pelo contato. Retornarei em breve.</p>
+      <button class="btn btn--primario" id="fecharModal">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Script externo (no final do body para garantir que o HTML já foi carregado) -->
+  <script src="script.js"></script>
+</body>
+</html>
