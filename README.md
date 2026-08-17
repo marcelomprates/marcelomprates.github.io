@@ -52,6 +52,28 @@ Ou abrir `index.html` direto no navegador / Live Server no VS Code.
 
 ## 📌 Changelog
 
+### 2026-08-17 · Fase 3 — marca Digital Droids
+- **Marca própria em SVG**: um droid cuja face é um terminal (barra de título,
+  prompt `>`, cursor `_`) — amarra na assinatura `~/marcelo_` que já existia.
+  Inline, ~500 bytes, `currentColor`, nítido de 16px a qualquer tamanho.
+- Aplicada em: favicon (todas as páginas), header ao lado do `~/marcelo_`,
+  assinatura da marca abrindo a seção Digital Droids, e rodapé.
+- O cursor do droid pisca no mesmo ritmo do cursor do logo, e respeita
+  `prefers-reduced-motion`.
+- **Ícones dos serviços trocados de emoji para SVG inline** — emoji vinham
+  coloridos e com desenho diferente em cada sistema operacional, competindo com
+  a marca. Agora são 4 ícones no mesmo traço do droid (viewBox 32, stroke 2,
+  cantos redondos) usando `currentColor`. Classe `.servico__icone` → `.ico`.
+  Nenhum deles usa "janela com barra de título" — essa forma é exclusiva da marca.
+- **O site passou a respeitar o tema do sistema operacional.** Antes o escuro só
+  aparecia clicando no botão: quem usa o SO em dark recebia o site claro na
+  primeira visita. Agora `@media (prefers-color-scheme: dark)` define o padrão,
+  e `:not([data-theme="light"])` preserva a escolha manual — **sistema decide,
+  usuário explícito ganha**. Script inline no `<head>` aplica o tema salvo antes
+  da primeira pintura, evitando flash. O botão inverte a partir do tema
+  *efetivo*, não do atributo, senão o primeiro clique não faria nada.
+
+
 ### 2026-08-17 · Fase 2 — conteúdo e posicionamento
 - **Links mortos eliminados.** Os três cards apontavam para o perfil genérico do
   GitHub; nenhum dos projetos tem repo público. Agora levam a estudos de caso.

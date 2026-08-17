@@ -38,6 +38,28 @@
   --sombra:       0 12px 34px rgba(0, 0, 0, 0.45);
 }
 
+/* ----------------------------- PREFERÊNCIA DO SISTEMA -------------------- */
+/* Quem usa o SO em modo escuro recebia o site claro na primeira visita — o
+   tema escuro só aparecia depois de clicar no botão. Aqui a preferência do
+   sistema vira o padrão.
+
+   `:not([data-theme="light"])` é o que preserva a escolha manual: se a pessoa
+   clicou em "claro", o JS grava data-theme="light" e este bloco não se aplica.
+   Regra: preferência do sistema decide; escolha explícita do usuário ganha. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fundo:        #0e1117;
+    --superficie:   #171b22;
+    --superficie-2: #1f242d;
+    --texto:        #eef1f5;
+    --texto-suave:  #9aa3b0;
+    --borda:        #2a303a;
+    --acento:       #f2a444;
+    --acento-claro: #ffc878;
+    --sombra:       0 12px 34px rgba(0, 0, 0, 0.45);
+  }
+}
+
 /* ----------------------------- RESET / BASE ----------------------------- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -609,11 +631,17 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--acento);
   transform: translateY(-2px);
 }
-.servico__icone {
+/* Ícones dos serviços em SVG, não emoji: herdam a cor do tema e têm o mesmo
+   traço da marca. Emoji muda de desenho entre Windows, Mac e Android e vinha
+   colorido, competindo com o âmbar. */
+.ico {
   display: block;
-  font-size: 1.5rem;
-  margin-bottom: 0.7rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: 0.9rem;
+  color: var(--acento);
 }
+.servico:hover .ico { color: var(--acento-claro); }
 .servico__titulo {
   font-family: var(--fonte-display);
   font-size: 1.05rem;
@@ -767,3 +795,73 @@ a { color: inherit; text-decoration: none; }
    (medido: sobravam 3px de folga — funciona, mas quebra com zoom ou fonte maior) */
 :target,
 section[id] { scroll-margin-top: 6rem; }
+
+/* =========================================================================
+   FASE 3 — marca Digital Droids
+   O droid é um SVG inline usando currentColor, então herda a cor do
+   contexto e funciona nos dois temas sem duplicar arquivo.
+   ========================================================================= */
+
+.droid {
+  width: 1.6em;
+  height: 1.6em;
+  flex-shrink: 0;
+  color: var(--acento);
+}
+
+/* O cursor do droid pisca no mesmo ritmo do cursor do ~/marcelo_ —
+   é o detalhe que amarra a marca à assinatura que já existia. */
+@keyframes droid-pisca {
+  0%, 45%   { opacity: 1; }
+  50%, 95%  { opacity: 0.2; }
+  100%      { opacity: 1; }
+}
+.droid__cursor { animation: droid-pisca 1.6s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .droid__cursor { animation: none; }
+}
+
+/* ----------------------------- no header -------------------------------- */
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.nav__logo .droid { width: 1.45em; height: 1.45em; }
+
+/* ----------------------------- no rodapé -------------------------------- */
+.rodape__marca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.droid--rodape { width: 1.3em; height: 1.3em; }
+
+/* ----------------------------- assinatura da PJ ------------------------- */
+/* A marca completa aparece uma vez no site: aqui, abrindo a seção da PJ. */
+.pj-marca {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0.5rem 0 1.4rem;
+}
+.droid--marca {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+.pj-marca__nome {
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+
+@media (max-width: 640px) {
+  .droid--marca { width: 2.8rem; height: 2.8rem; }
+  .pj-marca__nome { font-size: 1.1rem; }
+}

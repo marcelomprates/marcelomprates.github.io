@@ -19,12 +19,32 @@ document.addEventListener('DOMContentLoaded', function () {
   const iconeTema = document.getElementById('iconeTema');
   const html = document.documentElement;
 
-  // Recupera o tema salvo anteriormente pelo usuário (se houver)
-  const temaSalvo = localStorage.getItem('tema');
-  if (temaSalvo === 'dark') {
-    html.setAttribute('data-theme', 'dark');
-    if (iconeTema) iconeTema.textContent = '☀';
+  /* Três estados possíveis, não dois:
+       data-theme="dark"   → usuário escolheu escuro
+       data-theme="light"  → usuário escolheu claro
+       sem atributo        → nunca escolheu, quem manda é o SO (ver estilo.css)
+
+     O atributo é aplicado antes da pintura por um script inline no <head>,
+     para não piscar o tema errado enquanto este arquivo carrega. */
+
+  const prefereEscuro = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // O tema que está valendo AGORA na tela — considerando o SO quando não há
+  // escolha explícita. Sem isso o botão inverteria a partir do estado errado.
+  function temaEfetivo() {
+    return html.getAttribute('data-theme') || (prefereEscuro.matches ? 'dark' : 'light');
   }
+
+  function atualizarIcone() {
+    if (iconeTema) iconeTema.textContent = temaEfetivo() === 'dark' ? '☀' : '◐';
+  }
+
+  atualizarIcone();
+
+  // Se a pessoa nunca escolheu e trocar o tema do SO, o site acompanha na hora
+  prefereEscuro.addEventListener('change', function () {
+    if (!html.getAttribute('data-theme')) atualizarIcone();
+  });
 
   // IMPORTANTE: este mesmo script.js roda também nas páginas de estudo de caso,
   // que não têm todos os elementos da home. Sem estas guardas de null, o primeiro
@@ -32,16 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // do arquivo — inclusive o formulário e o ano do rodapé.
   if (botaoTema) {
     botaoTema.addEventListener('click', function () {
-      const ehEscuro = html.getAttribute('data-theme') === 'dark';
-      if (ehEscuro) {
-        html.removeAttribute('data-theme');   // volta ao tema claro
-        if (iconeTema) iconeTema.textContent = '◐';
-        localStorage.setItem('tema', 'light');
-      } else {
-        html.setAttribute('data-theme', 'dark');  // ativa tema escuro
-        if (iconeTema) iconeTema.textContent = '☀';
-        localStorage.setItem('tema', 'dark');
-      }
+      const novo = temaEfetivo() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', novo);   // a partir daqui a escolha é explícita
+      localStorage.setItem('tema', novo);
+      atualizarIcone();
     });
   }
 

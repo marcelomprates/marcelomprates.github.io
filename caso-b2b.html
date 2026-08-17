@@ -16,17 +16,40 @@
   <meta property="og:description" content="Catálogo digital e pedidos de clientes integrados ao ERP, sem redigitação.">
   <meta property="og:locale" content="pt_BR">
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23e08a2b' stroke-width='2' stroke-linecap='round'><path d='M16 3.4v2.6'/><circle cx='16' cy='2' r='1.5' fill='%23e08a2b' stroke='none'/><rect x='4' y='6' width='24' height='20' rx='5.5'/><path d='M4.6 11.2h22.8' stroke-width='1.4' opacity='.5'/><path d='M10 16.2l2.8 2.4-2.8 2.4' stroke-linejoin='round'/><path d='M16.4 21h5.6'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilo.css">
+
+  <!-- Aplica o tema salvo ANTES da primeira pintura. Sem isso, quem escolheu
+       "claro" com o SO em escuro veria um flash escuro até o script.js rodar.
+       Precisa ficar aqui no <head>, síncrono e antes do CSS renderizar. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) { /* localStorage bloqueado: cai no padrão do sistema */ }
+    })();
+  </script>
+
 </head>
 
 <body>
   <header class="cabecalho">
     <nav class="nav" aria-label="Navegação principal">
       <a href="index.html" class="nav__logo">
+        <svg class="droid" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
         <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
       </a>
       <ul class="nav__lista" id="navLista">
@@ -166,7 +189,14 @@
   </main>
 
   <footer class="rodape">
-    <p class="rodape__marca"><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p class="rodape__marca"><svg class="droid droid--rodape" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
     <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
   </footer>
 
