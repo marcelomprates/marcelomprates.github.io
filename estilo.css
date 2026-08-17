@@ -865,3 +865,65 @@ section[id] { scroll-margin-top: 6rem; }
   .droid--marca { width: 2.8rem; height: 2.8rem; }
   .pj-marca__nome { font-size: 1.1rem; }
 }
+
+/* =========================================================================
+   PÁGINA /aprendizado — gerada por gerar-aprendizado.py
+   ========================================================================= */
+
+.licao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--acento);
+  border-radius: var(--raio);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.2rem;
+}
+.licao__titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 0 0 0.45rem;
+  color: var(--texto);
+}
+.licao__meta {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.8rem;
+}
+.licao__meta code {
+  background: var(--superficie-2);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}
+.licao__texto {
+  color: var(--texto-suave);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.vazio {
+  border: 1px dashed var(--borda);
+  border-radius: var(--raio);
+  padding: 2rem;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+.nota-rodape {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+.nota-rodape code {
+  font-family: var(--fonte-mono);
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+  color: var(--acento);
+}
+.nota-rodape a { color: var(--acento); }
