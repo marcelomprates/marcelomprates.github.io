@@ -30,6 +30,22 @@ def data_legivel(iso):
         return iso
 
 
+def separar_titulo(primeira_linha):
+    """Divide a primeira linha do bloco em (título, sobra).
+
+    A convenção original pedia o título numa linha e o texto na seguinte —
+    fácil de esquecer no meio de um commit, e quando esquece, o título sai
+    cortado onde o editor quebrou a linha. Então: se a primeira linha já
+    termina uma frase no meio dela, o título vai até ali e o resto desce
+    para o corpo. Se não termina, a linha inteira é o título — que é o
+    comportamento da convenção original, preservado.
+    """
+    m = re.search(r"(?<=[.!?])\s+", primeira_linha)
+    if not m:
+        return primeira_linha.strip(), ""
+    return primeira_linha[:m.start()].strip(), primeira_linha[m.end():].strip()
+
+
 def do_git():
     """Lê o histórico e extrai os blocos 'Aprendi:'."""
     try:
@@ -51,16 +67,26 @@ def do_git():
 
         # "Aprendi:" abre o bloco; ele vai até uma linha em branco ou o fim
         for m in re.finditer(r"^Aprendi:[ \t]*(.*)$", corpo, re.M):
-            titulo = m.group(1).strip()
-            resto = corpo[m.end():].split("\n")
-            linhas = []
-            for linha in resto:
+            resto = corpo[m.end():]
+            # $ com re.M casa ANTES do \n, então resto começa com a quebra da
+            # própria linha do "Aprendi:". Sem descartar essa quebra, a primeira
+            # linha do split é "" e o laço abaixo parava de cara — todo commit
+            # saía com o corpo vazio. Descarta exatamente UMA quebra: uma linha
+            # em branco de verdade logo abaixo continua significando "sem corpo".
+            if resto.startswith("\n"):
+                resto = resto[1:]
+
+            titulo, sobra = separar_titulo(m.group(1).strip())
+
+            linhas = [sobra] if sobra else []
+            for linha in resto.split("\n"):
                 if not linha.strip():
                     break
                 linhas.append(linha.strip())
+            texto = " ".join(linhas).strip()
             registros.append({
                 "titulo": titulo,
-                "texto": " ".join(linhas),
+                "texto": texto,
                 "data": data,
                 "origem": assunto.strip(),
                 "hash": commit_hash[:7],
@@ -127,11 +153,15 @@ def montar_itens(registros):
         if r["hash"]:
             meta.append(f'<code>{r["hash"]}</code>')
 
+        # Registro sem corpo é legítimo (título já diz tudo). Só não pode
+        # sobrar um <p> vazio ocupando espaço na página.
+        corpo_html = (f'\n          <p class="licao__texto">{html.escape(r["texto"])}</p>'
+                      if r["texto"] else "")
+
         partes.append(f"""
         <article class="licao">
           <h2 class="licao__titulo">{html.escape(r["titulo"])}</h2>
-          <p class="licao__meta">{' · '.join(meta)}</p>
-          <p class="licao__texto">{html.escape(r["texto"])}</p>
+          <p class="licao__meta">{' · '.join(meta)}</p>{corpo_html}
         </article>""")
     return "\n".join(partes)
 
