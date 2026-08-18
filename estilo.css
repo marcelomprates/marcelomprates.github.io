@@ -927,3 +927,122 @@ section[id] { scroll-margin-top: 6rem; }
   color: var(--acento);
 }
 .nota-rodape a { color: var(--acento); }
+
+/* ------------------- OFERTA ÚNICA (seção PJ, v2) ----------------------- */
+/* Substituiu o grid de quatro serviços genéricos. A hierarquia agora é:
+   oferta em uma frase → sintomas → método por semana → recebe/não faço →
+   preço e primeiro passo → prova. Um caminho só, do problema ao contato. */
+.oferta {
+  max-width: 62ch;
+  font-size: 1.06rem;
+  line-height: 1.75;
+  color: var(--texto-suave);
+  border-left: 3px solid var(--acento);
+  padding-left: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+.oferta strong { color: var(--texto); }
+
+/* Subtítulo em mono com "//": mesma gramática visual do .eyebrow, mas em
+   nível de bloco dentro da seção. */
+.pj-sub {
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--acento);
+  margin: 2.6rem 0 0.9rem;
+}
+
+.sinais { list-style: none; max-width: 62ch; }
+.sinais li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--texto-suave);
+}
+/* Marcador em ::before em vez de bullet nativo: alinha com o texto e herda
+   a cor do tema. aria-hidden não é necessário — conteúdo gerado por CSS não
+   entra na árvore de acessibilidade dos leitores modernos. */
+.sinais li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--acento);
+  font-family: var(--fonte-mono);
+}
+.sinais--ok li::before { content: "✓"; }
+.sinais--nao li::before { content: "×"; color: var(--texto-suave); }
+
+.etapa__num {
+  display: inline-block;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--acento);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.pj-colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0 2.5rem;
+}
+
+.pj-cta__texto strong { color: var(--texto); }
+
+.pj-extra {
+  max-width: 62ch;
+  margin-top: 1.8rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--texto-suave);
+}
+.pj-extra a { color: var(--acento); font-weight: 600; }
+.pj-extra a:hover { text-decoration: underline; }
+
+/* As quatro etapas são uma SEQUÊNCIA, não um catálogo: com auto-fit o quarto
+   card caía sozinho numa segunda linha e quebrava a leitura semana 1→4. */
+.etapas { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1000px) { .etapas { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .etapas { grid-template-columns: 1fr; } }
+
+/* Três filtros: condição → destino. A seta é decorativa (aria-hidden) e some
+   no mobile, onde o ::before do destino assume o papel — assim o leitor de
+   tela nunca ouve "seta para a direita" no meio da frase. */
+.filtros { list-style: none; margin-top: 0.4rem; max-width: 78ch; }
+.filtro {
+  display: grid;
+  grid-template-columns: 1fr auto 1.05fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px dashed var(--borda);
+}
+.filtro:last-child { border-bottom: none; }
+.filtro__cond {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.filtro__seta { font-family: var(--fonte-mono); color: var(--acento); }
+.filtro__dest {
+  color: var(--texto);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+@media (max-width: 640px) {
+  .filtro { grid-template-columns: 1fr; gap: 0.25rem; }
+  .filtro__seta { display: none; }
+  .filtro__dest::before {
+    content: "→ ";
+    color: var(--acento);
+    font-family: var(--fonte-mono);
+  }
+}
