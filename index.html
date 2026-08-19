@@ -101,14 +101,64 @@
         "url": "https://marcelomprates.github.io/",
         "logo": "https://marcelomprates.github.io/droid.svg",
         "founder": { "@id": "https://marcelomprates.github.io/#marcelo" },
-        "description": "Desenvolvimento, automação e integração de sistemas."
+        "description": "Desenvolvimento, automação e integração de sistemas.",
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automação de uma rotina manual",
+            "serviceType": "Automação de processos",
+            "description": "Automação de uma rotina manual da empresa, com escopo fechado na primeira semana e entrega em três semanas, mais 30 dias de ajuste inclusos. O cliente recebe o código e a documentação.",
+            "provider": { "@id": "https://marcelomprates.github.io/#digitaldroids" }
+          }
+        }
       },
       {
         "@type": "WebSite",
         "url": "https://marcelomprates.github.io/",
         "name": "Marcelo Prates | Desenvolvedor Full Stack",
         "inLanguage": "pt-BR",
+        "dateModified": "2026-08-18",
         "publisher": { "@id": "https://marcelomprates.github.io/#marcelo" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://marcelomprates.github.io/#faq",
+        "inLanguage": "pt-BR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quanto tempo leva?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Três semanas, contadas do fechamento do escopo: a primeira é de mapeamento, a segunda e a terceira de construção, e a entrega acontece na quarta, junto com o time. Depois disso, 30 dias de ajuste inclusos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto custa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O preço é fechado e definido antes de começar, depois da conversa de diagnóstico — sem hora extra e sem surpresa no meio do caminho. A conversa de diagnóstico em si não tem custo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O código fica comigo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fica. Você recebe o código e a documentação de como a automação funciona e o que fazer quando ela falhar. A ideia não é te deixar dependente de mim."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E se eu não souber qual rotina automatizar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "É exatamente o trabalho da primeira semana. Normalmente a rotina certa é a que alguém repete muitas vezes por semana sempre do mesmo jeito — e quase nunca é a que primeiro vem à cabeça."
+            }
+          }
+        ]
       }
     ]
   }
@@ -531,6 +581,43 @@ a IA acelera, o engenheiro decide</code></pre>
           </p>
           <a href="#contato" class="btn btn--primario">Falar sobre uma rotina</a>
         </div>
+
+        <!-- Perguntas frequentes. Existem por dois motivos e os dois contam:
+             respondem a objeção real de quem está decidindo, e são o formato
+             que buscador e assistente de IA conseguem citar — pergunta curta,
+             resposta autocontida. O JSON-LD FAQPage no <head> espelha ESTAS
+             perguntas; se mudar uma aqui, muda lá também. -->
+        <h3 class="pj-sub">// perguntas frequentes</h3>
+        <dl class="faq">
+          <dt class="faq__p">Quanto tempo leva?</dt>
+          <dd class="faq__r">
+            Três semanas, contadas do fechamento do escopo: a primeira é de
+            mapeamento, a segunda e a terceira de construção, e a entrega
+            acontece na quarta, junto com o time. Depois disso, 30 dias de
+            ajuste inclusos.
+          </dd>
+
+          <dt class="faq__p">Quanto custa?</dt>
+          <dd class="faq__r">
+            O preço é fechado e definido antes de começar, depois da conversa
+            de diagnóstico — sem hora extra e sem surpresa no meio do caminho.
+            A conversa de diagnóstico em si não tem custo.
+          </dd>
+
+          <dt class="faq__p">O código fica comigo?</dt>
+          <dd class="faq__r">
+            Fica. Você recebe o código e a documentação de como a automação
+            funciona e o que fazer quando ela falhar. A ideia não é te deixar
+            dependente de mim.
+          </dd>
+
+          <dt class="faq__p">E se eu não souber qual rotina automatizar?</dt>
+          <dd class="faq__r">
+            É exatamente o trabalho da primeira semana. Normalmente a rotina
+            certa é a que alguém repete muitas vezes por semana sempre do mesmo
+            jeito — e quase nunca é a que primeiro vem à cabeça.
+          </dd>
+        </dl>
 
         <!-- Prova de entrega como PJ. É a única coisa no site que mostra alguém
              que pagou e recebeu — o resto é do empregador ou projeto pessoal. -->
