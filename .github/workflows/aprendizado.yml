@@ -1,8 +1,12 @@
-name: Gerar log de aprendizado
+name: Gerar páginas derivadas
 
-# Roda a cada push na main. Lê o histórico, extrai os blocos "Aprendi:" das
-# mensagens de commit e regenera aprendizado.html. Nada precisa ser feito
-# à mão — nem clonar o repo, nem rodar script local.
+# Roda a cada push na main e regenera o que é DERIVADO do repositório:
+#
+#   aprendizado.html  <- blocos "Aprendi:" das mensagens de commit
+#   sitemap.xml       <- data do último commit que tocou cada página
+#
+# As duas coisas já existiam no git; o trabalho aqui é só transformá-las em
+# página. Nada precisa ser feito à mão — nem clonar o repo, nem rodar script.
 
 on:
   push:
@@ -10,7 +14,7 @@ on:
   workflow_dispatch:        # permite rodar na mão pelo botão "Run workflow"
 
 permissions:
-  contents: write           # necessário para commitar a página gerada de volta
+  contents: write           # necessário para commitar as páginas geradas
 
 jobs:
   gerar:
@@ -31,19 +35,25 @@ jobs:
       - name: Gerar aprendizado.html
         run: python3 gerar-aprendizado.py
 
+      # Depois do aprendizado, de propósito: o gerador do sitemap detecta que
+      # aprendizado.html acabou de mudar e usa a data de hoje para ele, em vez
+      # da data da alteração anterior.
+      - name: Gerar sitemap.xml
+        run: python3 gerar-sitemap.py
+
       - name: Publicar se mudou
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Se o arquivo não mudou, não faz commit — evita histórico poluído
-          if git diff --quiet -- aprendizado.html; then
+          # Se nada mudou, não faz commit — evita histórico poluído
+          if git diff --quiet -- aprendizado.html sitemap.xml; then
             echo "Nada mudou. Nenhum commit necessário."
             exit 0
           fi
 
-          git add aprendizado.html
+          git add aprendizado.html sitemap.xml
           # [skip ci] impede que este commit dispare o workflow de novo,
           # o que criaria um laço infinito de builds
-          git commit -m "chore: atualiza log de aprendizado [skip ci]"
+          git commit -m "chore: atualiza paginas derivadas [skip ci]"
           git push
