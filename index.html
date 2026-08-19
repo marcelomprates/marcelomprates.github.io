@@ -109,7 +109,16 @@
             "name": "Automação de uma rotina manual",
             "serviceType": "Automação de processos",
             "description": "Automação de uma rotina manual da empresa, com escopo fechado na primeira semana e entrega em três semanas, mais 30 dias de ajuste inclusos. O cliente recebe o código e a documentação.",
-            "provider": { "@id": "https://marcelomprates.github.io/#digitaldroids" }
+            "provider": { "@id": "https://marcelomprates.github.io/#digitaldroids" },
+            "areaServed": { "@type": "Country", "name": "Brasil" },
+            "availableChannel": {
+              "@type": "ServiceChannel",
+              "serviceUrl": "https://marcelomprates.github.io/#contato",
+              "serviceLocation": {
+                "@type": "VirtualLocation",
+                "url": "https://marcelomprates.github.io/#contato"
+              }
+            }
           }
         }
       },
@@ -148,6 +157,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Fica. Você recebe o código e a documentação de como a automação funciona e o que fazer quando ela falhar. A ideia não é te deixar dependente de mim."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Você atende fora de São Paulo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Atendo. O trabalho é remoto, para todo o Brasil — inclusive a semana de mapeamento, feita por chamada com quem executa a rotina hoje."
             }
           },
           {
@@ -609,6 +626,13 @@ a IA acelera, o engenheiro decide</code></pre>
             Fica. Você recebe o código e a documentação de como a automação
             funciona e o que fazer quando ela falhar. A ideia não é te deixar
             dependente de mim.
+          </dd>
+
+          <dt class="faq__p">Você atende fora de São Paulo?</dt>
+          <dd class="faq__r">
+            Atendo. O trabalho é remoto, para todo o Brasil — inclusive a
+            semana de mapeamento, feita por chamada com quem executa a rotina
+            hoje.
           </dd>
 
           <dt class="faq__p">E se eu não souber qual rotina automatizar?</dt>
