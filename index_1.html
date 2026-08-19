@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<!--
+  Portfólio Pessoal - Marcelo Prates
+  Atividade Prática - Fundamentos da Programação Web (UNINTER)
+  HTML5 semântico, CSS3 puro e JavaScript (sem frameworks)
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport para responsividade (mobile first) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Marcelo Prates — Desenvolvedor Full Stack focado em IA, automação digital e integração de sistemas. Portfólio, estudos de caso e serviços Digital Droids.">
+  <title>Marcelo Prates | Desenvolvedor Full Stack</title>
+
+  <!-- OpenGraph: como o link aparece quando compartilhado -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://marcelomprates.github.io/">
+  <meta property="og:title" content="Marcelo Prates | Desenvolvedor Full Stack">
+  <meta property="og:description" content="Desenvolvedor Full Stack focado em IA, automação digital e integração de sistemas. Projetos em produção numa indústria de embalagens e serviços sob demanda pela Digital Droids.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://marcelomprates.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Digital Droids — Marcelo Prates, Desenvolvedor Full Stack">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://marcelomprates.github.io/">
+  <!-- Ícones como arquivos reais na raiz: o SVG serve navegador moderno, o .ico
+       cobre o pedido automático de /favicon.ico, e o apple-touch-icon é o que o
+       iOS usa quando alguém salva o site na tela de início. -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Fontes do Google: display, corpo e monoespaçada (carregadas no navegador do visitante) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <!-- Folha de estilo externa -->
+  <link rel="stylesheet" href="estilo.css">
+
+  <!-- Aplica o tema salvo ANTES da primeira pintura. Sem isso, quem escolheu
+       "claro" com o SO em escuro veria um flash escuro até o script.js rodar.
+       Precisa ficar aqui no <head>, síncrono e antes do CSS renderizar. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) { /* localStorage bloqueado: cai no padrão do sistema */ }
+    })();
+  </script>
+
+
+  <!-- Dados estruturados: diz ao Google e ao LinkedIn que esta página é uma
+       PESSOA, não um site genérico. Resolve o "No author found" do inspector.
+       Só afirmações verificáveis aqui — nada de título ou formação inflada. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://marcelomprates.github.io/#marcelo",
+        "name": "Marcelo de Morais Prates",
+        "alternateName": "Marcelo Prates",
+        "jobTitle": "Desenvolvedor Full Stack",
+        "email": "marcelomprates@gmail.com",
+        "url": "https://marcelomprates.github.io/",
+        "image": "https://marcelomprates.github.io/og-image.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Guarulhos",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "knowsAbout": [
+          "Desenvolvimento full stack",
+          "Integração de sistemas",
+          "Automação de processos",
+          "Inteligência artificial aplicada",
+          "Python", "TypeScript", "JavaScript", "React", "Node.js", "Docker"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "ETEP Faculdades"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/marcelo-de-morais-prates",
+          "https://github.com/marcelomprates"
+        ],
+        "worksFor": { "@id": "https://marcelomprates.github.io/#digitaldroids" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://marcelomprates.github.io/#digitaldroids",
+        "name": "Digital Droids",
+        "url": "https://marcelomprates.github.io/",
+        "logo": "https://marcelomprates.github.io/droid.svg",
+        "founder": { "@id": "https://marcelomprates.github.io/#marcelo" },
+        "description": "Desenvolvimento, automação e integração de sistemas.",
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automação de uma rotina manual",
+            "serviceType": "Automação de processos",
+            "description": "Automação de uma rotina manual da empresa, com escopo fechado na primeira semana e entrega em três semanas, mais 30 dias de ajuste inclusos. O cliente recebe o código e a documentação.",
+            "provider": { "@id": "https://marcelomprates.github.io/#digitaldroids" }
+          }
+        }
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://marcelomprates.github.io/",
+        "name": "Marcelo Prates | Desenvolvedor Full Stack",
+        "inLanguage": "pt-BR",
+        "dateModified": "2026-08-18",
+        "publisher": { "@id": "https://marcelomprates.github.io/#marcelo" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://marcelomprates.github.io/#faq",
+        "inLanguage": "pt-BR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quanto tempo leva?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Três semanas, contadas do fechamento do escopo: a primeira é de mapeamento, a segunda e a terceira de construção, e a entrega acontece na quarta, junto com o time. Depois disso, 30 dias de ajuste inclusos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto custa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O preço é fechado e definido antes de começar, depois da conversa de diagnóstico — sem hora extra e sem surpresa no meio do caminho. A conversa de diagnóstico em si não tem custo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O código fica comigo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fica. Você recebe o código e a documentação de como a automação funciona e o que fazer quando ela falhar. A ideia não é te deixar dependente de mim."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E se eu não souber qual rotina automatizar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "É exatamente o trabalho da primeira semana. Normalmente a rotina certa é a que alguém repete muitas vezes por semana sempre do mesmo jeito — e quase nunca é a que primeiro vem à cabeça."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- ============================ CABEÇALHO / MENU FIXO ============================ -->
+  <!-- O menu fica fixo no topo e é visível em todas as seções da página -->
+  <header class="cabecalho" id="topo">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#topo" class="nav__logo">
+        <svg class="droid" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+
+      <!-- Botão hamburguer: aparece apenas no mobile, controlado por JavaScript -->
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__lista" id="navLista">
+        <li><a href="#sobre" class="nav__link">Sobre mim</a></li>
+        <li><a href="#formacao" class="nav__link">Formação</a></li>
+        <li><a href="#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="#servicos" class="nav__link">Serviços</a></li>
+        <li><a href="aprendizado.html" class="nav__link">Aprendizado</a></li>
+        <li><a href="#contato" class="nav__link">Contato</a></li>
+        <!-- Botão de alternância de tema claro/escuro -->
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================ HERO / SOBRE MIM ============================ -->
+    <section class="hero" id="sobre">
+      <div class="hero__interno">
+        <p class="eyebrow"><span class="eyebrow__num">01</span> // sobre mim</p>
+        <h1 class="hero__titulo">
+          Marcelo Prates
+        </h1>
+        <p class="hero__papel">Desenvolvedor Full Stack</p>
+        <p class="hero__sub">IA · Automação digital · Integração de sistemas</p>
+
+        <p class="hero__texto">
+          Há mais de dez anos numa indústria de embalagens, onde hoje respondo pela área de
+          tecnologia e desenvolvo as aplicações que ela usa para operar — do comercial ao
+          chão de fábrica. Sistemas que rodam em produção, com gente dependendo deles
+          todo dia.
+        </p>
+
+        <p class="hero__texto">
+          Meu trabalho vive na fronteira entre três coisas: <strong>aplicações web de ponta
+          a ponta</strong>, <strong>automação de processos</strong> e <strong>integração de
+          sistemas que não foram feitos para conversar</strong> — ERPs, APIs de terceiros,
+          planilhas que viraram lei interna. Em paralelo, curso Engenharia de Software e
+          Inteligência Artificial &amp; Automação Digital.
+        </p>
+
+        <!-- Vibe Coding: método explicado, não afirmado como cargo -->
+        <div class="metodo">
+          <h2 class="metodo__titulo">Como eu trabalho: Vibe Coding</h2>
+          <p class="metodo__texto">
+            Uso IA como acelerador em todo o ciclo — protótipo, refatoração, teste,
+            documentação. Mas a IA não decide arquitetura, não escolhe o trade-off e não
+            responde pelo sistema às três da manhã. <strong>A IA acelera; o engenheiro
+            decide.</strong>
+          </p>
+          <p class="metodo__texto">
+            Na prática isso significa saber ler o que a ferramenta produziu, reconhecer
+            quando a resposta está plausível mas errada, e ter repertório para dizer
+            "refaz". É por isso que continuo estudando fundamento enquanto uso IA todo
+            dia: sem base, você não audita o que a máquina te entrega.
+          </p>
+        </div>
+
+        <div class="hero__acoes">
+          <a href="#portfolio" class="btn btn--primario">Ver projetos</a>
+          <a href="#contato" class="btn btn--secundario">Falar comigo</a>
+        </div>
+
+        <!-- "Cartão de terminal" — elemento de assinatura que reforça a identidade de dev -->
+        <div class="terminal" aria-hidden="true">
+          <div class="terminal__barra">
+            <span></span><span></span><span></span>
+          </div>
+          <pre class="terminal__corpo"><code>$ whoami
+marcelo_prates
+$ cat stack.txt
+Python · TypeScript · React · Node · Docker
+$ cat metodo.txt
+a IA acelera, o engenheiro decide</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FORMAÇÃO ============================ -->
+    <section class="secao" id="formacao">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">02</span> // formação</p>
+        <h2 class="secao__titulo">Formação &amp; idiomas</h2>
+
+        <!-- Linha do tempo de formação acadêmica -->
+        <ol class="timeline">
+          <li class="timeline__item">
+            <span class="timeline__periodo">2025 — 2029 · em andamento</span>
+            <h3 class="timeline__cargo">Bacharelado em Engenharia de Software</h3>
+            <p class="timeline__local">Centro Universitário Internacional UNINTER</p>
+            <p class="timeline__desc">
+              Graduação focada em arquitetura de software, desenvolvimento web e mobile,
+              banco de dados e boas práticas de engenharia.
+            </p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__periodo">2026 — 2027 · em andamento</span>
+            <h3 class="timeline__cargo">Tecnólogo em Inteligência Artificial e Automação Digital</h3>
+            <p class="timeline__local">UniFECAF em parceria com a Faculdade de Tecnologia Rocketseat</p>
+            <p class="timeline__desc">
+              Formação voltada a LLMs aplicados, agentes de voz e automação de
+              processos de negócio.
+            </p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__periodo">Concluído</span>
+            <h3 class="timeline__cargo">Técnico em Informática Industrial</h3>
+            <p class="timeline__local">ETEP Faculdades</p>
+            <p class="timeline__desc">
+              Base técnica em informática aplicada à indústria.
+            </p>
+          </li>
+        </ol>
+
+        <!-- Idiomas e competências -->
+        <div class="grade-skills">
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Idiomas</h3>
+            <ul class="lista-simples">
+              <li>Português — Nativo</li>
+              <li>Inglês — Técnico/Leitura</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Stack agrupada por finalidade: diz mais que uma lista solta de nomes -->
+        <div class="grade-skills grade-skills--stack">
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Linguagens</h3>
+            <ul class="tags">
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>JavaScript</li>
+              <li>HTML5</li>
+              <li>CSS3</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Web</h3>
+            <ul class="tags">
+              <li>React</li>
+              <li>Node.js</li>
+              <li>FastAPI</li>
+              <li>Firebase</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">IA &amp; automação</h3>
+            <ul class="tags">
+              <li>Claude</li>
+              <li>GPT-4o</li>
+              <li>Gemini</li>
+              <li>ElevenLabs</li>
+              <li>Twilio</li>
+              <li>n8n</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Integração</h3>
+            <ul class="tags">
+              <li>Tiny ERP</li>
+              <li>Alterdata</li>
+              <li>APIs REST</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Infra &amp; deploy</h3>
+            <ul class="tags">
+              <li>Docker</li>
+              <li>Coolify</li>
+              <li>GitHub Actions</li>
+              <li>GHCR</li>
+              <li>Linux</li>
+            </ul>
+          </div>
+          <div class="skill-bloco">
+            <h3 class="skill-bloco__titulo">Ferramentas</h3>
+            <ul class="tags">
+              <li>Cursor</li>
+              <li>Claude Code</li>
+              <li>Copilot</li>
+              <li>Git</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PORTFÓLIO ============================ -->
+    <section class="secao secao--alt" id="portfolio">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">03</span> // portfólio</p>
+        <h2 class="secao__titulo">Projetos &amp; trabalhos</h2>
+        <p class="secao__intro">
+          Uma seleção do que venho construindo entre o trabalho na indústria e os estudos.
+        </p>
+
+        <!-- Grade de cards de projetos -->
+        <div class="projetos">
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">Full Stack · Indústria</span>
+            </div>
+            <h3 class="projeto__titulo">PCP Embalagem</h3>
+            <p class="projeto__desc">
+              Sistema completo de Planejamento e Controle de Produção para a indústria de
+              embalagens — do CRM e orçamentos ao chão de fábrica, estoque e logística.
+              Deploy automatizado com Docker e Coolify.
+            </p>
+            <p class="projeto__stack">Python · React · Firebase · Docker</p>
+            <div class="projeto__rodape">
+              <a href="caso-pcp.html" class="projeto__link">Ver o caso →</a>
+              <span class="projeto__selo" title="Código proprietário do empregador">🔒 código privado</span>
+            </div>
+          </article>
+
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">Web · B2B</span>
+            </div>
+            <h3 class="projeto__titulo">Plataforma B2B Scuadra</h3>
+            <p class="projeto__desc">
+              Plataforma B2B para pedidos de clientes da Scuadra Embalagens, integrando o
+              catálogo digital ao Tiny ERP.
+            </p>
+            <p class="projeto__stack">Node.js · React · Tiny API · Docker</p>
+            <div class="projeto__rodape">
+              <a href="caso-b2b.html" class="projeto__link">Ver o caso →</a>
+              <span class="projeto__selo" title="Código proprietário do empregador">🔒 código privado</span>
+            </div>
+          </article>
+
+          <article class="projeto">
+            <div class="projeto__topo">
+              <span class="projeto__tag">IA · API</span>
+            </div>
+            <h3 class="projeto__titulo">Controle Financeiro com IA</h3>
+            <p class="projeto__desc">
+              API de controle financeiro com análise inteligente de gastos via Google
+              Gemini, leitura de NFC-e por QR Code e relatório mensal com sugestões.
+            </p>
+            <p class="projeto__stack">Python · FastAPI · Firestore · Gemini</p>
+            <div class="projeto__rodape">
+              <a href="caso-financeiro.html" class="projeto__link">Ver o caso →</a>
+              <!-- TODO Marcelo: depois de abrir o repo, trocar o href abaixo pela URL real
+                   e remover este comentário. Antes de abrir, revisar TODO o histórico de
+                   commits em busca de chave da Gemini / credencial do Firebase. -->
+              <span class="projeto__selo projeto__selo--breve">repo em revisão</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ DIGITAL DROIDS / PJ ============================ -->
+    <!-- Seção comercial: aqui quem fala é a PJ, não o profissional CLT -->
+    <section class="secao secao--pj" id="servicos">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">04</span> // digital droids</p>
+
+        <!-- Assinatura da marca: a marca aparece inteira uma vez, aqui -->
+        <div class="pj-marca">
+          <svg class="droid droid--marca" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+            <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+            <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="pj-marca__nome">Digital<br>Droids</span>
+        </div>
+
+        <h2 class="secao__titulo">Um processo manual a menos, em três semanas</h2>
+
+        <!-- Oferta ÚNICA e fechada. Substituiu quatro blocos genéricos de serviço:
+             cardápio sem preço obriga o visitante a descobrir sozinho qual item é
+             o problema dele, quanto custa e quanto demora — quatro degraus antes
+             do primeiro contato. Aqui sobra um degrau só. -->
+        <p class="oferta">
+          <strong>Digital Droids</strong> é a minha PJ, e a oferta é uma só:
+          eu automatizo <strong>uma</strong> rotina manual da sua empresa.
+          Escopo fechado na primeira semana, preço fechado, entrega em três.
+        </p>
+
+        <h3 class="pj-sub">// isso é pra você se…</h3>
+        <ul class="sinais">
+          <li>alguém do time copia dado de uma tela pra outra toda semana</li>
+          <li>o pedido chega por WhatsApp e é redigitado no sistema na mão</li>
+          <li>o relatório de todo mês nasce de três planilhas diferentes</li>
+          <li>a resposta para <em>“por que ainda é assim?”</em> é <em>“sempre foi”</em></li>
+        </ul>
+
+        <h3 class="pj-sub">// como funciona</h3>
+        <div class="servicos etapas">
+          <article class="servico">
+            <span class="etapa__num">semana 1</span>
+            <h4 class="servico__titulo">Mapeamento</h4>
+            <p class="servico__desc">
+              Sento com quem faz a rotina hoje e escrevo o processo real — incluindo as
+              exceções que ninguém documenta porque “todo mundo sabe”. Daqui sai o
+              escopo fechado.
+            </p>
+          </article>
+
+          <article class="servico">
+            <span class="etapa__num">semanas 2–3</span>
+            <h4 class="servico__titulo">Construção</h4>
+            <p class="servico__desc">
+              A automação é feita, testada com dado real e monitorada para
+              <strong>falhar alto</strong>. Automação que quebra em silêncio é pior que
+              rotina manual — todo mundo acha que está funcionando.
+            </p>
+          </article>
+
+          <article class="servico">
+            <span class="etapa__num">semana 4</span>
+            <h4 class="servico__titulo">Entrega</h4>
+            <p class="servico__desc">
+              Rodando, com o time usando junto e sabendo o que fazer quando algo sair
+              do esperado. Não é entrega por e-mail.
+            </p>
+          </article>
+
+          <article class="servico">
+            <span class="etapa__num">depois</span>
+            <h4 class="servico__titulo">30 dias de ajuste</h4>
+            <p class="servico__desc">
+              Inclusos. Processo real só mostra o que faltou depois que começa a rodar
+              de verdade.
+            </p>
+          </article>
+        </div>
+
+        <!-- Os três filtros. Mostram o CRITÉRIO, não a ferramenta: é o que
+             separa "uso IA" de saber onde ela não deve entrar. Ancora o Vibe
+             Coding em algo verificável em vez de slogan. -->
+        <h3 class="pj-sub">// como eu decido o que vira IA</h3>
+        <p class="secao__intro">
+          Passo cada etapa do processo por três perguntas. Quase nunca a resposta
+          é “tudo vira IA” — e prometer isso é o caminho mais curto para entregar
+          algo que ninguém usa.
+        </p>
+        <ul class="filtros">
+          <li class="filtro">
+            <span class="filtro__cond">Segue regra fixa e precisa sair certo toda vez?</span>
+            <span class="filtro__seta" aria-hidden="true">→</span>
+            <span class="filtro__dest">software comum. IA aqui só adiciona risco.</span>
+          </li>
+          <li class="filtro">
+            <span class="filtro__cond">Alguém precisa ler algo bagunçado e usar julgamento?</span>
+            <span class="filtro__seta" aria-hidden="true">→</span>
+            <span class="filtro__dest">aí sim o modelo. É exatamente pra isso que ele serve.</span>
+          </li>
+          <li class="filtro">
+            <span class="filtro__cond">Errar sai caro, ou a situação aparece uma vez por ano?</span>
+            <span class="filtro__seta" aria-hidden="true">→</span>
+            <span class="filtro__dest">fica com a pessoa. Automatizar não compensa.</span>
+          </li>
+        </ul>
+
+        <div class="pj-colunas">
+          <div>
+            <h3 class="pj-sub">// o que você recebe</h3>
+            <ul class="sinais sinais--ok">
+              <li>a rotina rodando</li>
+              <li>o código, seu — você não fica preso a mim</li>
+              <li>documento de como funciona e o que fazer quando falhar</li>
+              <li>30 dias de ajuste</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="pj-sub">// o que eu não faço</h3>
+            <ul class="sinais sinais--nao">
+              <li>não assumo a manutenção do seu sistema legado inteiro</li>
+              <li>não vendo “transformação digital” — entrego uma rotina</li>
+              <li>não começo projeto sem escopo fechado</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sem número público: quem assume o papel do preço é a previsibilidade
+             ("fechado, antes de começar") + o primeiro passo sem custo. -->
+        <div class="pj-cta">
+          <p class="pj-cta__texto">
+            <strong>Preço fechado, definido antes de começar.</strong> Sem hora extra,
+            sem surpresa no meio. A primeira conversa é de diagnóstico e não custa nada:
+            eu olho a rotina e digo se dá para resolver em três semanas —
+            <strong>se não der, eu digo também.</strong>
+          </p>
+          <a href="#contato" class="btn btn--primario">Falar sobre uma rotina</a>
+        </div>
+
+        <!-- Perguntas frequentes. Existem por dois motivos e os dois contam:
+             respondem a objeção real de quem está decidindo, e são o formato
+             que buscador e assistente de IA conseguem citar — pergunta curta,
+             resposta autocontida. O JSON-LD FAQPage no <head> espelha ESTAS
+             perguntas; se mudar uma aqui, muda lá também. -->
+        <h3 class="pj-sub">// perguntas frequentes</h3>
+        <dl class="faq">
+          <dt class="faq__p">Quanto tempo leva?</dt>
+          <dd class="faq__r">
+            Três semanas, contadas do fechamento do escopo: a primeira é de
+            mapeamento, a segunda e a terceira de construção, e a entrega
+            acontece na quarta, junto com o time. Depois disso, 30 dias de
+            ajuste inclusos.
+          </dd>
+
+          <dt class="faq__p">Quanto custa?</dt>
+          <dd class="faq__r">
+            O preço é fechado e definido antes de começar, depois da conversa
+            de diagnóstico — sem hora extra e sem surpresa no meio do caminho.
+            A conversa de diagnóstico em si não tem custo.
+          </dd>
+
+          <dt class="faq__p">O código fica comigo?</dt>
+          <dd class="faq__r">
+            Fica. Você recebe o código e a documentação de como a automação
+            funciona e o que fazer quando ela falhar. A ideia não é te deixar
+            dependente de mim.
+          </dd>
+
+          <dt class="faq__p">E se eu não souber qual rotina automatizar?</dt>
+          <dd class="faq__r">
+            É exatamente o trabalho da primeira semana. Normalmente a rotina
+            certa é a que alguém repete muitas vezes por semana sempre do mesmo
+            jeito — e quase nunca é a que primeiro vem à cabeça.
+          </dd>
+        </dl>
+
+        <!-- Prova de entrega como PJ. É a única coisa no site que mostra alguém
+             que pagou e recebeu — o resto é do empregador ou projeto pessoal. -->
+        <h3 class="pj-sub">// já entreguei</h3>
+        <p class="secao__intro">
+          Sites institucionais para pequenas empresas de São Paulo — projeto, código,
+          hospedagem e e-mail configurados. Entregues ponta a ponta e no ar.
+        </p>
+
+        <div class="projetos">
+          <article class="projeto">
+            <span class="projeto__tag">site institucional</span>
+            <h4 class="projeto__titulo">Marcenaria Classe A</h4>
+            <p class="projeto__desc">
+              Móveis sob medida em São Paulo. Institucional com galeria de projetos e
+              pedido de orçamento.
+            </p>
+            <p class="projeto__stack">site · hospedagem · e-mail</p>
+            <a href="https://www.marcenariaclassea.com.br/" class="projeto__link"
+               target="_blank" rel="noopener">visitar o site →</a>
+          </article>
+
+          <article class="projeto">
+            <span class="projeto__tag">site institucional</span>
+            <h4 class="projeto__titulo">Somos T2 Eventos</h4>
+            <p class="projeto__desc">
+              Presença digital para uma operação de eventos, com os canais de contato
+              no lugar onde o cliente procura.
+            </p>
+            <p class="projeto__stack">site · hospedagem · e-mail</p>
+            <a href="https://somost2eventos.com.br/" class="projeto__link"
+               target="_blank" rel="noopener">visitar o site →</a>
+          </article>
+
+          <article class="projeto">
+            <span class="projeto__tag">site institucional</span>
+            <h4 class="projeto__titulo">PR Baltazar</h4>
+            <p class="projeto__desc">
+              Site institucional entregue completo: estrutura, conteúdo, publicação e
+              e-mail próprio no domínio.
+            </p>
+            <p class="projeto__stack">site · hospedagem · e-mail</p>
+            <a href="https://prbaltazar.com.br/" class="projeto__link"
+               target="_blank" rel="noopener">visitar o site →</a>
+          </article>
+        </div>
+
+        <p class="pj-extra">
+          Fora isso, também pego integração de sistemas, IA aplicada ao negócio e
+          sistema interno sob medida — <a href="#contato">me conta o problema</a>.
+          Se eu não for o profissional certo pra ele, eu digo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================ CONTATO ============================ -->
+    <section class="secao" id="contato">
+      <div class="secao__interno">
+        <p class="eyebrow"><span class="eyebrow__num">05</span> // contato</p>
+        <h2 class="secao__titulo">Vamos conversar</h2>
+        <p class="secao__intro">
+          Preencha o formulário abaixo. Os campos são validados antes do envio.
+        </p>
+
+        <!-- Formulário de contato com validação em JavaScript -->
+        <!-- novalidate desativa a validação nativa para usarmos a nossa em JS -->
+        <!-- Endpoint real do Formspree. O envio acontece no script.js via fetch. -->
+        <form class="form" id="formContato" action="https://formspree.io/f/mnjkvepe" method="POST" novalidate>
+          <div class="form__campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome completo">
+            <small class="form__erro" id="erroNome"></small>
+          </div>
+
+          <div class="form__campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@exemplo.com">
+            <small class="form__erro" id="erroEmail"></small>
+          </div>
+
+          <div class="form__campo">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..."></textarea>
+            <small class="form__erro" id="erroMensagem"></small>
+          </div>
+
+          <button type="submit" class="btn btn--primario btn--bloco" id="botaoEnviar">Enviar mensagem</button>
+          <!-- Mensagem de status (erros de envio) exibida via JavaScript -->
+          <p class="form__status" id="formStatus" role="alert"></p>
+        </form>
+
+        <!-- Canais diretos de contato -->
+        <ul class="contato-direto">
+          <li><strong>E-mail:</strong> <a href="mailto:marcelomprates@gmail.com">marcelomprates@gmail.com</a></li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marcelo-de-morais-prates" target="_blank" rel="noopener">marcelo-de-morais-prates</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/marcelomprates" target="_blank" rel="noopener">@marcelomprates</a></li>
+          <li><strong>Local:</strong> Guarulhos, São Paulo</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ RODAPÉ ============================ -->
+  <footer class="rodape">
+    <p class="rodape__marca"><svg class="droid droid--rodape" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
+  </footer>
+
+  <!-- ============================ MODAL DE SUCESSO ============================ -->
+  <!-- Exibido por JavaScript somente após o Formspree confirmar o envio -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal__caixa">
+      <span class="modal__icone">✓</span>
+      <h3 class="modal__titulo">Mensagem enviada com sucesso!</h3>
+      <p class="modal__texto">Obrigado pelo contato. Retornarei em breve.</p>
+      <button class="btn btn--primario" id="fecharModal">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Script externo (no final do body para garantir que o HTML já foi carregado) -->
+  <script src="script.js"></script>
+</body>
+</html>

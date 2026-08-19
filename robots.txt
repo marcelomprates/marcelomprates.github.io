@@ -1,0 +1,7 @@
+# Tudo liberado, inclusive rastreadores de IA.
+# A ausência do arquivo já significava "liberado" — ele existe para declarar
+# a intenção e, principalmente, para apontar o sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: https://marcelomprates.github.io/sitemap.xml
