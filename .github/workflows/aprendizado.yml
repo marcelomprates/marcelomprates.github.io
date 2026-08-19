@@ -37,8 +37,10 @@ jobs:
 
       # Depois do aprendizado, de propósito: o gerador do sitemap detecta que
       # aprendizado.html acabou de mudar e usa a data de hoje para ele, em vez
-      # da data da alteração anterior.
-      - name: Gerar sitemap.xml
+      # da data da alteração anterior. Este passo também sincroniza o
+      # "dateModified" do JSON-LD de cada página — por isso o commit abaixo
+      # precisa incluir os .html, não só o sitemap.
+      - name: Gerar sitemap.xml e sincronizar datas do JSON-LD
         run: python3 gerar-sitemap.py
 
       - name: Publicar se mudou
@@ -47,12 +49,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Se nada mudou, não faz commit — evita histórico poluído
-          if git diff --quiet -- aprendizado.html sitemap.xml; then
+          if git diff --quiet -- sitemap.xml '*.html'; then
             echo "Nada mudou. Nenhum commit necessário."
             exit 0
           fi
 
-          git add aprendizado.html sitemap.xml
+          git add sitemap.xml '*.html'
           # [skip ci] impede que este commit dispare o workflow de novo,
           # o que criaria um laço infinito de builds
           git commit -m "chore: atualiza paginas derivadas [skip ci]"
