@@ -25,7 +25,7 @@ import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
 
-BASE = "https://marcelomprates.github.io/"
+BASE = "https://digitaldroids.com.br/"
 
 # Arquivos .html que NÃO são páginas navegáveis.
 # modelo-aprendizado.html é gabarito do gerador, não conteúdo.

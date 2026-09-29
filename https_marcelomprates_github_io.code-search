@@ -1,0 +1,194 @@
+# Query: https://marcelomprates.github.io
+# ContextLines: 1
+
+48 resultados - 10 arquivos
+
+aprendizado.html:
+  18    <meta property="og:type" content="website">
+  19:   <meta property="og:url" content="https://digitaldroids.com.br/aprendizado.html">
+  20    <meta property="og:title" content="Log de aprendizado — Marcelo Prates">
+
+  22    <meta property="og:locale" content="pt_BR">
+  23:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  24    <meta property="og:image:width" content="1200">
+
+  28  
+  29:   <link rel="canonical" href="https://digitaldroids.com.br/aprendizado.html">
+  30    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+caso-b2b.html:
+  14    <meta property="og:type" content="article">
+  15:   <meta property="og:url" content="https://digitaldroids.com.br/caso-b2b.html">
+  16    <meta property="og:title" content="Plataforma B2B — estudo de caso">
+
+  18    <meta property="og:locale" content="pt_BR">
+  19:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  20    <meta property="og:image:width" content="1200">
+
+  27         iOS usa quando alguém salva o site na tela de início. -->
+  28:   <link rel="canonical" href="https://digitaldroids.com.br/caso-b2b.html">
+  29    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  59      "description": "Estudo de caso: plataforma B2B que tirou o pedido do WhatsApp e o levou direto ao ERP, sem redigitação — e o que integrar com uma API que você não controla me ensinou.",
+  60:     "image": "https://digitaldroids.com.br/og-image.png",
+  61      "inLanguage": "pt-BR",
+
+  63      "dateModified": "2026-08-17",
+  64:     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://digitaldroids.com.br/caso-b2b.html" },
+  65      "author": {
+
+  67        "name": "Marcelo de Morais Prates",
+  68:       "url": "https://digitaldroids.com.br/",
+  69        "sameAs": [
+
+caso-financeiro.html:
+  14    <meta property="og:type" content="article">
+  15:   <meta property="og:url" content="https://digitaldroids.com.br/caso-financeiro.html">
+  16    <meta property="og:title" content="Controle Financeiro com IA — estudo de caso">
+
+  18    <meta property="og:locale" content="pt_BR">
+  19:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  20    <meta property="og:image:width" content="1200">
+
+  27         iOS usa quando alguém salva o site na tela de início. -->
+  28:   <link rel="canonical" href="https://digitaldroids.com.br/caso-financeiro.html">
+  29    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  59      "description": "Estudo de caso: API que lê a nota fiscal pelo QR Code da NFC-e e usa um LLM para o relatório mensal — separando o que é cálculo determinístico do que é interpretação.",
+  60:     "image": "https://digitaldroids.com.br/og-image.png",
+  61      "inLanguage": "pt-BR",
+
+  63      "dateModified": "2026-08-17",
+  64:     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://digitaldroids.com.br/caso-financeiro.html" },
+  65      "author": {
+
+  67        "name": "Marcelo de Morais Prates",
+  68:       "url": "https://digitaldroids.com.br/",
+  69        "sameAs": [
+
+caso-pcp.html:
+  15    <meta property="og:type" content="article">
+  16:   <meta property="og:url" content="https://digitaldroids.com.br/caso-pcp.html">
+  17    <meta property="og:title" content="PCP Embalagem — estudo de caso">
+
+  19    <meta property="og:locale" content="pt_BR">
+  20:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  21    <meta property="og:image:width" content="1200">
+
+  28         iOS usa quando alguém salva o site na tela de início. -->
+  29:   <link rel="canonical" href="https://digitaldroids.com.br/caso-pcp.html">
+  30    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  60      "description": "Estudo de caso: sistema de Planejamento e Controle de Produção que substituiu as planilhas de uma indústria de embalagens — do comercial ao chão de fábrica, com o que precisei aprender no caminho.",
+  61:     "image": "https://digitaldroids.com.br/og-image.png",
+  62      "inLanguage": "pt-BR",
+
+  64      "dateModified": "2026-08-17",
+  65:     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://digitaldroids.com.br/caso-pcp.html" },
+  66      "author": {
+
+  68        "name": "Marcelo de Morais Prates",
+  69:       "url": "https://digitaldroids.com.br/",
+  70        "sameAs": [
+
+gerar-sitemap.py:
+  27  
+  28: BASE = "https://digitaldroids.com.br/"
+  29  
+
+index.html:
+   16    <meta property="og:type" content="website">
+   17:   <meta property="og:url" content="https://digitaldroids.com.br/">
+   18    <meta property="og:title" content="Marcelo Prates | Desenvolvedor Full Stack">
+
+   20    <meta property="og:locale" content="pt_BR">
+   21:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+   22    <meta property="og:image:width" content="1200">
+
+   26  
+   27:   <link rel="canonical" href="https://digitaldroids.com.br/">
+   28    <!-- Ícones como arquivos reais na raiz: o SVG serve navegador moderno, o .ico
+
+   66          "@type": "Person",
+   67:         "@id": "https://digitaldroids.com.br/#marcelo",
+   68          "name": "Marcelo de Morais Prates",
+
+   71          "email": "marcelomprates@gmail.com",
+   72:         "url": "https://digitaldroids.com.br/",
+   73:         "image": "https://digitaldroids.com.br/og-image.png",
+   74          "address": {
+
+   94          ],
+   95:         "worksFor": { "@id": "https://digitaldroids.com.br/#digitaldroids" }
+   96        },
+
+   98          "@type": "Organization",
+   99:         "@id": "https://digitaldroids.com.br/#digitaldroids",
+  100          "name": "Digital Droids",
+  101:         "url": "https://digitaldroids.com.br/",
+  102:         "logo": "https://digitaldroids.com.br/droid.svg",
+  103:         "founder": { "@id": "https://digitaldroids.com.br/#marcelo" },
+  104          "description": "Desenvolvimento, automação e integração de sistemas.",
+
+  111              "description": "Automação de uma rotina manual da empresa, com escopo fechado na primeira semana e entrega em três semanas, mais 30 dias de ajuste inclusos. O cliente recebe o código e a documentação.",
+  112:             "provider": { "@id": "https://digitaldroids.com.br/#digitaldroids" },
+  113              "areaServed": { "@type": "Country", "name": "Brasil" },
+
+  115                "@type": "ServiceChannel",
+  116:               "serviceUrl": "https://digitaldroids.com.br/#contato"
+  117              }
+
+  122          "@type": "WebSite",
+  123:         "url": "https://digitaldroids.com.br/",
+  124          "name": "Marcelo Prates | Desenvolvedor Full Stack",
+
+  126          "dateModified": "2026-08-26",
+  127:         "publisher": { "@id": "https://digitaldroids.com.br/#marcelo" }
+  128        },
+
+  130          "@type": "FAQPage",
+  131:         "@id": "https://digitaldroids.com.br/#faq",
+  132          "inLanguage": "pt-BR",
+
+modelo-aprendizado.html:
+  18    <meta property="og:type" content="website">
+  19:   <meta property="og:url" content="https://digitaldroids.com.br/aprendizado.html">
+  20    <meta property="og:title" content="Log de aprendizado — Marcelo Prates">
+
+  22    <meta property="og:locale" content="pt_BR">
+  23:   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  24    <meta property="og:image:width" content="1200">
+
+  28  
+  29:   <link rel="canonical" href="https://digitaldroids.com.br/aprendizado.html">
+  30    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+README.md:
+  7  
+  8: - **Site:** https://digitaldroids.com.br
+  9  - **Origem:** evoluído de
+
+robots.txt:
+  6  
+  7: Sitemap: https://digitaldroids.com.br/sitemap.xml
+
+sitemap.xml:
+   5    <url>
+   6:     <loc>https://digitaldroids.com.br/</loc>
+   7      <lastmod>2026-09-29</lastmod>
+
+   9    <url>
+  10:     <loc>https://digitaldroids.com.br/aprendizado.html</loc>
+  11      <lastmod>2026-08-19</lastmod>
+
+  13    <url>
+  14:     <loc>https://digitaldroids.com.br/caso-b2b.html</loc>
+  15      <lastmod>2026-08-17</lastmod>
+
+  17    <url>
+  18:     <loc>https://digitaldroids.com.br/caso-financeiro.html</loc>
+  19      <lastmod>2026-08-17</lastmod>
+
+  21    <url>
+  22:     <loc>https://digitaldroids.com.br/caso-pcp.html</loc>
+  23      <lastmod>2026-08-17</lastmod>

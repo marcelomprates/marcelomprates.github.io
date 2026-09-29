@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marcelomprates.github.io/sitemap.xml
+Sitemap: https://digitaldroids.com.br/sitemap.xml

@@ -5,7 +5,7 @@ e sem etapa de build. Deploy é `git push` (GitHub Pages, branch `main`, raiz).
 
 ## 🔗 Acesso
 
-- **Site:** https://marcelomprates.github.io
+- **Site:** https://digitaldroids.com.br
 - **Origem:** evoluído de
   [`portfolio-marcelo-prates`](https://github.com/marcelomprates/portfolio-marcelo-prates),
   Atividade Prática de *Fundamentos da Programação Web* (Engenharia de
