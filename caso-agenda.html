@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--
+  Estudo de caso: Agenda Nelci Leite
+  Projeto pessoal. Repositório PRIVADO de propósito: o banco tem nome e telefone
+  de paciente. Não abrir sem anonimizar e sem revisar TODO o histórico de commits.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estudo de caso: PWA que substituiu a agenda de papel de uma podóloga, com ponte para o WhatsApp por link wa.me — sem API, sem custo mensal.">
+  <title>Agenda Nelci Leite | Marcelo Prates</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://digitaldroids.com.br/caso-agenda.html">
+  <meta property="og:title" content="Agenda Nelci Leite — estudo de caso">
+  <meta property="og:description" content="Estudo de caso: seis telas para trocar o caderno de papel de uma podóloga, desenhadas a partir da rotina real — e a decisão de NÃO colocar IA onde ela não pagaria o próprio custo.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image:alt" content="Digital Droids — Marcelo Prates, Desenvolvedor Full Stack">
+
+  <!-- Ícones como arquivos reais na raiz: o SVG serve navegador moderno, o .ico
+       cobre o pedido automático de /favicon.ico, e o apple-touch-icon é o que o
+       iOS usa quando alguém salva o site na tela de início. -->
+  <link rel="canonical" href="https://digitaldroids.com.br/caso-agenda.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+
+  <!-- Aplica o tema salvo ANTES da primeira pintura. Sem isso, quem escolheu
+       "claro" com o SO em escuro veria um flash escuro até o script.js rodar.
+       Precisa ficar aqui no <head>, síncrono e antes do CSS renderizar. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('tema');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) { /* localStorage bloqueado: cai no padrão do sistema */ }
+    })();
+  </script>
+
+
+  <!-- Article com autor e data: resolve "No author found" e "No publication
+       date found" que o Post Inspector do LinkedIn aponta. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Agenda Nelci Leite — estudo de caso",
+    "description": "Estudo de caso: seis telas para trocar o caderno de papel de uma podóloga, desenhadas a partir da rotina real — e a decisão de NÃO colocar IA onde ela não pagaria o próprio custo.",
+    "image": "https://digitaldroids.com.br/og-image.png",
+    "inLanguage": "pt-BR",
+    "datePublished": "2026-09-29",
+    "dateModified": "2026-09-29",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://digitaldroids.com.br/caso-agenda.html" },
+    "author": {
+      "@type": "Person",
+      "name": "Marcelo de Morais Prates",
+      "url": "https://digitaldroids.com.br/",
+      "sameAs": [
+        "https://www.linkedin.com/in/marcelo-de-morais-prates",
+        "https://github.com/marcelomprates"
+      ]
+    },
+    "publisher": { "@type": "Person", "name": "Marcelo de Morais Prates" }
+  }
+  </script>
+</head>
+
+<body>
+  <header class="cabecalho">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html" class="nav__logo">
+        <svg class="droid" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__prompt">~/</span>marcelo<span class="nav__cursor">_</span>
+      </a>
+      <ul class="nav__lista" id="navLista">
+        <li><a href="index.html#portfolio" class="nav__link">Portfólio</a></li>
+        <li><a href="aprendizado.html" class="nav__link">Aprendizado</a></li>
+        <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+        <li>
+          <button class="tema" id="botaoTema" aria-label="Alternar tema claro e escuro">
+            <span class="tema__icone" id="iconeTema">◐</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="caso">
+    <article class="caso__interno">
+      <a href="index.html#portfolio" class="caso__voltar">← voltar ao portfólio</a>
+
+      <p class="eyebrow">// estudo de caso · projeto pessoal</p>
+      <h1 class="caso__titulo">Agenda Nelci Leite</h1>
+      <p class="caso__resumo">
+        Aplicativo que substituiu o caderno de papel de uma podóloga. Seis telas,
+        uma usuária, nenhuma tela de configuração. O caso mais útil do portfólio
+        para mostrar como eu decido escopo — porque metade do trabalho foi tirar coisa.
+      </p>
+
+      <div class="caso__meta">
+        <span><strong>Papel:</strong> projeto pessoal, ponta a ponta</span>
+        <span><strong>Stack:</strong> React · TypeScript · Firebase · PWA</span>
+        <span><strong>Código:</strong> repositório privado (dado de paciente)</span>
+      </div>
+
+      <h2>O problema</h2>
+      <p>
+        A Nelci é podóloga e atende cerca de cinco pacientes por dia. O paciente marca
+        pelo WhatsApp; ela anota numa agenda de papel. São dois lugares que não conversam.
+      </p>
+      <p>
+        A dor não era "não ter sistema". Era que <strong>o papel não é pesquisável,
+        enquanto a marcação acontece em outro lugar</strong>. Como muito paciente marca
+        e depois quer trocar de horário, toda remarcação virava uma sincronização manual
+        entre um chat e um caderno: achar a pessoa no papel, apagar, achar vaga nova,
+        voltar no WhatsApp, confirmar. Várias vezes por dia.
+      </p>
+      <p>
+        O diagnóstico veio de cinco perguntas sobre a rotina real, não de um brainstorm
+        de funcionalidades. Sem elas, eu teria construído um sistema de gestão de clínica
+        — e ela teria continuado no caderno.
+      </p>
+
+      <h2>O que foi construído</h2>
+      <p>
+        Seis telas, e uma regra: nada pede que ela aprenda um jeito novo de trabalhar.
+        Ela continua marcando como marca hoje; o que muda é onde a informação fica.
+      </p>
+      <ul>
+        <li><strong>Hoje</strong> — quem vem hoje, com um toque para marcar como atendida</li>
+        <li><strong>Semana</strong> — achar vaga quando alguém pergunta</li>
+        <li><strong>Buscar</strong> — achar paciente pelo nome, ignorando acento e maiúscula</li>
+        <li><strong>Nova</strong> — cinco campos e um botão</li>
+        <li><strong>Detalhe</strong> — dados do paciente e as duas ações</li>
+        <li><strong>Remarcar</strong> — escolher horário novo e avisar</li>
+      </ul>
+      <p>
+        O toque em "atendida" na tela Hoje <strong>já é o registro do atendimento</strong>.
+        Ela não digita nada a mais — e esse toque gera exatamente o histórico de que a
+        fase seguinte precisa. Registro que exige trabalho extra é registro que não acontece.
+      </p>
+      <p>
+        O app instala na tela inicial do celular como PWA. Para uma usuária não-técnica,
+        "abrir o navegador e digitar o endereço" já é atrito suficiente para o projeto morrer.
+      </p>
+
+      <h2>A ponte com o WhatsApp: dez linhas em vez de uma integração</h2>
+      <p>
+        O botão "Avisar no WhatsApp" é um link <code>wa.me</code> com a mensagem já
+        escrita — abre a conversa do paciente no telefone dela, e ela só toca em enviar.
+        Sem API oficial, sem verificação de negócio na Meta, sem automação intermediária,
+        sem custo mensal.
+      </p>
+      <p>
+        Isso mata a parte mais chata da remarcação — reescrever a mensagem toda vez —
+        com um punhado de linhas. A camada oficial pode entrar depois, se um dia fizer
+        falta. Começar por ela seria pagar uma conta antes de ter o problema.
+      </p>
+
+      <h2>Onde eu decidi NÃO colocar IA</h2>
+      <p>
+        O reflexo óbvio seria um bot de IA atendendo o WhatsApp. Eu fiz a conta: são
+        cerca de dez mensagens por dia. Ela responde melhor e mais rápido do que qualquer
+        bot, e em contexto de saúde o tom importa — mensagem automática sobre tratamento
+        soa errada com muita facilidade.
+      </p>
+      <p>
+        IA que não paga o próprio custo é enfeite caro. O mesmo filtro tirou da v1 a
+        ficha clínica (dado pessoal sensível na LGPD, entra quando puder ser feito
+        direito), os relatórios (derivam do registro — com dois meses de uso saem quase
+        de graça) e toda tela de configuração, que é dúvida transformada em interface.
+      </p>
+
+      <h2>Modelagem: a decisão que barateou tudo</h2>
+      <p>
+        Agendamento e atendimento são <strong>o mesmo registro</strong>, mudando de
+        status. É por isso que o toque no círculo sai de graça: ela não cria nada, só
+        muda um campo. Em duas coleções separadas, ela teria que registrar duas vezes —
+        e não registraria.
+      </p>
+      <p>
+        No mesmo espírito, o status <code>faltou</code> existe desde a v1, mesmo sem tela
+        para ele. É o dado mais valioso que ninguém coleta no começo, e histórico
+        retroativo não se inventa.
+      </p>
+
+      <h2>Como se sabe que funcionou</h2>
+      <p>
+        O critério não é elogio. São três semanas rodando em paralelo com o caderno:
+        se ela largar o papel sozinha, funcionou. Se voltar para o papel, a pergunta
+        certa é "o que o caderno faz que o app não faz" — e a resposta vale mais do que
+        qualquer funcionalidade planejada.
+      </p>
+      <p>
+        O teste de usabilidade é entregar o celular sem explicar nada e pedir quatro
+        coisas: quem vem hoje depois do almoço, mudar o horário de uma paciente, marcar
+        outra como atendida, achar um terceiro pelo nome. Ficar calado e anotar onde ela
+        hesita. Cada hesitação é defeito de interface, não falha de entendimento dela.
+      </p>
+
+
+      <!-- ============ O CORAÇÃO: log de aprendizado ============ -->
+      <div class="aprendi">
+        <h2>O que eu precisei saber para construir isso</h2>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">entrevistar antes de projetar</span>
+          Cinco perguntas sobre a rotina real mudaram o produto inteiro. O volume baixo
+          — cinco atendimentos por dia — foi o dado que derrubou metade das ideias, e eu
+          só teria descoberto perguntando.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">regra de segurança como fronteira</span>
+          A chave do Firebase no front é pública por natureza: dá para ler no navegador
+          de qualquer jeito. Quem protege o dado é a regra do Firestore, não o segredo
+          da chave — e "autenticado" sem lista de UIDs significa qualquer pessoa que
+          criar conta no projeto.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">acessibilidade obriga decisão de design</span>
+          Calculei o contraste das cinco cores da marca: três não passam para texto.
+          Em vez de descartá-las, dei função a elas — cada serviço virou uma cor. E o
+          estado "atendida" nunca é comunicado só por cor: tem opacidade, risco no nome
+          e círculo preenchido.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">fuso horário e casos-limite de telefone</span>
+          Data "solta" faz o horário aparecer três horas deslocado — bug que só se
+          descobre quando o paciente não vem. E testar se um número já tem o código do
+          país por "começa com 55" dá falso positivo: DDD 55 existe, é Santa Maria.
+          Testar pelo tamanho.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">LGPD como restrição de escopo</span>
+          Nome e telefone são dado pessoal. Ficha clínica, evolução e foto são dado
+          pessoal <em>sensível</em>, com regime bem mais rígido. Saber a diferença é o
+          que define o que pode entrar agora e o que precisa de preparo antes.
+        </div>
+
+      </div>
+
+      <h2>Próximo passo</h2>
+      <p>
+        A fase seguinte é a lista de retorno: paciente que não volta não reclama, não
+        aparece em lugar nenhum e some sem ninguém notar. Ela só vem depois de dois meses
+        de registro acumulado — antes disso não há o que ler.
+      </p>
+
+      <p style="margin-top:2.5rem">
+        <a href="index.html#contato" class="btn btn--primario">Conversar sobre um projeto assim</a>
+      </p>
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <p class="rodape__marca"><svg class="droid droid--rodape" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3.4v2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="2" r="1.5" fill="currentColor"/>
+          <rect x="4" y="6" width="24" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M4.6 11.2h22.8" stroke="currentColor" stroke-width="1.4" opacity=".5"/>
+          <path d="M10 16.2l2.8 2.4-2.8 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="droid__cursor" d="M16.4 21h5.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg><strong>Digital Droids</strong> · Marcelo de Morais Prates</p>
+    <p>© <span id="ano"></span> — Construído com HTML5, CSS3 e JavaScript, sem frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
