@@ -57,5 +57,5 @@ jobs:
           git add sitemap.xml '*.html'
           # [skip ci] impede que este commit dispare o workflow de novo,
           # o que criaria um laço infinito de builds
-          git commit -m "chore: atualiza paginas derivadas [skip ci]"
+          git commit -m "chore: atualiza paginas derivadas"
           git push
