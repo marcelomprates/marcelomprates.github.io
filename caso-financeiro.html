@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <!--
-  Estudo de caso: Controle Financeiro com IA
-  Projeto pessoal. Repo pode ser aberto — antes disso, revisar TODO o histórico
-  de commits em busca de chave da Gemini e credencial do Firebase.
+  Estudo de caso: DD-01 — Controle Financeiro com IA
+  Projeto pessoal, em producao com acesso restrito. Repositorio PRIVADO (04/11).
+  Se um dia for aberto: revisar TODO o historico de commits antes, buscando
+  chave da Gemini, credencial do Firebase e conteudo de .env.
 -->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Estudo de caso: API de controle financeiro com leitura de NFC-e por QR Code e análise de gastos com Gemini.">
-  <title>Controle Financeiro com IA | Marcelo Prates</title>
+  <meta name="description" content="Estudo de caso: app de finanças pessoais que modela o ciclo do cartão de crédito e usa IA em três análises — mês, simulador de compra e projeção de meses.">
+  <title>DD-01 · Controle Financeiro com IA | Marcelo Prates</title>
 
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://digitaldroids.com.br/caso-financeiro.html">
-  <meta property="og:title" content="Controle Financeiro com IA — estudo de caso">
-  <meta property="og:description" content="Estudo de caso: API que lê a nota fiscal pelo QR Code da NFC-e e usa um LLM para o relatório mensal — separando o que é cálculo determinístico do que é interpretação.">
+  <meta property="og:title" content="DD-01 · Controle Financeiro com IA — estudo de caso">
+  <meta property="og:description" content="Estudo de caso: app de finanças pessoais em produção que modela o ciclo do cartão e usa IA em três análises — sempre com o número saindo de código, nunca do modelo.">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:image" content="https://digitaldroids.com.br/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -55,8 +56,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Controle Financeiro com IA — estudo de caso",
-    "description": "Estudo de caso: API que lê a nota fiscal pelo QR Code da NFC-e e usa um LLM para o relatório mensal — separando o que é cálculo determinístico do que é interpretação.",
+    "headline": "DD-01 · Controle Financeiro com IA — estudo de caso",
+    "description": "Estudo de caso: app de finanças pessoais em produção que modela o ciclo do cartão e usa IA em três análises — sempre com o número saindo de código, nunca do modelo.",
     "image": "https://digitaldroids.com.br/og-image.png",
     "inLanguage": "pt-BR",
     "datePublished": "2026-08-17",
@@ -108,58 +109,95 @@
       <a href="index.html#portfolio" class="caso__voltar">← voltar ao portfólio</a>
 
       <p class="eyebrow">// estudo de caso · projeto pessoal</p>
-      <h1 class="caso__titulo">Controle Financeiro com IA</h1>
+      <h1 class="caso__titulo">DD-01 · Controle Financeiro com IA</h1>
       <p class="caso__resumo">
-        API que lê a nota fiscal pelo QR Code da NFC-e, organiza os gastos e usa um LLM
-        para produzir um relatório mensal com análise e sugestões. Nasceu de uma coceira
-        pessoal: saber pra onde o dinheiro vai sem digitar nada.
+        Aplicativo de finanças pessoais que entende cartão de crédito de verdade —
+        fechamento, vencimento, parcela que cai daqui a oito meses — e usa um LLM em
+        três momentos diferentes para responder perguntas que planilha nenhuma
+        responde. Está em produção, com acesso restrito.
       </p>
 
       <div class="caso__meta">
         <span><strong>Papel:</strong> projeto pessoal, ponta a ponta</span>
-        <span><strong>Stack:</strong> Python · FastAPI · Firestore · Gemini</span>
-        <span><strong>Código:</strong> repo em revisão para abertura</span>
+        <span><strong>Stack:</strong> Next.js · TypeScript · Python · FastAPI · Firestore · Gemini · Cloud Run</span>
+        <span><strong>Código:</strong> repositório privado</span>
       </div>
 
       <h2>O problema</h2>
       <p>
         Todo app de finanças pessoais morre no mesmo ponto: <strong>a digitação</strong>.
         Você usa por duas semanas, esquece de lançar três compras, os números param de
-        bater, e aí não faz mais sentido continuar. O gargalo nunca foi a análise — foi
-        a entrada de dados.
+        bater, e aí não faz mais sentido continuar.
       </p>
       <p>
-        Só que toda nota fiscal de consumidor no Brasil já vem com um QR Code que aponta
-        para os dados estruturados da compra. A informação existe. Só não estava sendo
-        usada.
+        Só que mesmo quando o registro acontece, sobra um problema maior: o extrato conta
+        o passado. A pergunta que importa é sobre o futuro — <em>se eu parcelar isso em
+        dez vezes, como fica abril?</em> O cartão de crédito é uma máquina de empurrar
+        compromisso pra frente, e quase nenhuma ferramenta mostra onde ele cai.
       </p>
 
       <h2>O que foi construído</h2>
+      <p>
+        Backend em FastAPI, frontend em Next.js, oito telas e um design system próprio.
+        O núcleo é o ciclo do cartão:
+      </p>
       <ul>
-        <li><strong>Leitura de NFC-e por QR Code</strong> — a compra entra sem digitação manual</li>
-        <li><strong>Persistência no Firestore</strong> — histórico consultável</li>
-        <li><strong>API em FastAPI</strong> — as operações expostas de forma limpa</li>
-        <li><strong>Relatório mensal via Gemini</strong> — análise dos gastos e sugestões em linguagem natural</li>
+        <li><strong>Cartões com fechamento e vencimento</strong> — a competência de cada
+          parcela sai do ciclo real do cartão, não do mês da compra</li>
+        <li><strong>Parcelamento com distribuição de centavos</strong> — a soma das
+          parcelas é exatamente o valor da compra, sem sobra de um centavo na última</li>
+        <li><strong>Receitas recorrentes</strong> — frequência, dia de recebimento e
+          período de vigência, para a renda do mês ser calculada e não digitada</li>
+        <li><strong>Leitura do QR Code da NFC-e</strong> — extrai a chave de acesso de
+          44 dígitos e identifica o estado emissor a partir da URL</li>
       </ul>
 
-      <h2>Onde a IA ajuda de verdade — e onde não</h2>
+      <h2>Três usos de IA, e nenhum deles é "chatbot"</h2>
       <p>
-        Este projeto foi bom pra calibrar isso. O LLM é excelente pra transformar uma
-        lista de transações numa leitura que faz sentido pra um humano: agrupar por
-        padrão, notar o que fugiu do normal, escrever num tom útil.
-      </p>
-      <p>
-        O que ele <strong>não</strong> deve fazer é somar. Cálculo é determinístico e
-        tem que ser código — não porque o modelo erre sempre, mas porque quando errar
-        você não tem como saber. A divisão que eu adotei:
+        O que me interessou neste projeto foi usar o LLM três vezes, para três perguntas
+        de natureza diferente:
       </p>
       <ul>
-        <li><strong>Código</strong> — extrair, somar, categorizar por regra, persistir</li>
-        <li><strong>LLM</strong> — interpretar, resumir, sugerir, escrever</li>
+        <li><strong>Análise do mês</strong> — classifica a saúde financeira em verde,
+          amarelo ou vermelho pelo percentual da renda comprometida, e devolve um
+          diagnóstico curto com meta de gasto diário para os dias que faltam</li>
+        <li><strong>Simulador de compra</strong> — projeta o impacto de uma compra
+          parcelada nos meses seguintes e dá um veredito, <em>sem gravar nada</em></li>
+        <li><strong>Respiro financeiro</strong> — projeta de 1 a 24 meses cruzando renda
+          recorrente, parcelas e gastos fixos: saldo médio, mês mais apertado, tendência</li>
       </ul>
       <p>
-        É a mesma lógica do Vibe Coding aplicada ao produto: a IA acelera a parte
-        interpretativa, mas o número que aparece na tela sai de código auditável.
+        Os três têm a mesma arquitetura por baixo: <strong>o número nunca sai do
+        modelo</strong>. Código extrai, soma, distribui parcela e projeta saldo; o LLM
+        recebe os números prontos e escreve a leitura. Cálculo é determinístico e tem que
+        ser código — não porque o modelo erre sempre, mas porque quando errar você não
+        tem como saber. E a resposta volta tipada em Pydantic: se o modelo inventar um
+        campo, a validação derruba antes de chegar na tela.
+      </p>
+
+      <h2>Acesso privado é decisão, não limitação</h2>
+      <p>
+        O app está no ar, mas só entra quem está na lista. Toda rota valida o ID token do
+        Firebase e confere o e-mail; as regras do Firestore são fechadas em
+        <code>if false</code>, então só o backend toca os dados pelo Admin SDK — a
+        configuração web do Firebase é pública por natureza, e quem protege o dado é a
+        regra, não o segredo da chave.
+      </p>
+      <p>
+        É dado financeiro pessoal. Deixar aberto para demonstração seria trocar o próprio
+        propósito do projeto por um botão de "testar aqui".
+      </p>
+
+      <h2>O que ele ainda não faz</h2>
+      <p>
+        A leitura da nota para por enquanto na chave de acesso: o app identifica a nota,
+        mas <strong>ainda não traz os itens da compra</strong> — isso depende de buscar
+        os dados na SEFAZ, e está pendente. Na prática, o valor ainda é digitado.
+      </p>
+      <p>
+        Fica registrado aqui de propósito. O problema que abriu este caso — a digitação —
+        continua resolvido só pela metade, e caso que só conta a parte boa não serve de
+        estudo de caso.
       </p>
 
 
@@ -168,40 +206,52 @@
         <h2>O que eu precisei saber para construir isso</h2>
 
         <div class="aprendi__item">
-          <span class="aprendi__conceito">FastAPI e tipagem em Python</span>
-          Schemas explícitos deixaram de ser burocracia e viraram a primeira linha de
-          defesa contra dado malformado entrando no sistema.
-        </div>
-
-        <div class="aprendi__item">
-          <span class="aprendi__conceito">modelagem NoSQL</span>
-          Firestore não é tabela. Modelar pensando em como o dado vai ser lido, e não
-          em como ele se relaciona, exigiu desaprender o reflexo relacional.
-        </div>
-
-        <div class="aprendi__item">
-          <span class="aprendi__conceito">prompt como parte do sistema</span>
-          O prompt do relatório é código: versionado, testado com entradas reais, e
-          modificado com o mesmo cuidado de uma função. Prompt improvisado quebra em
-          silêncio.
-        </div>
-
-        <div class="aprendi__item">
           <span class="aprendi__conceito">a fronteira determinístico × probabilístico</span>
           Decidir explicitamente o que é cálculo e o que é interpretação. Foi a decisão
-          de arquitetura mais importante do projeto.
+          de arquitetura mais importante do projeto, e ela se repetiu igual nas três
+          análises.
         </div>
 
         <div class="aprendi__item">
-          <span class="aprendi__conceito">gestão de segredo</span>
-          Chave de API não entra no repositório. Aprendi que isso vale para o
-          <em>histórico</em> também — um commit antigo com credencial continua público
-          para sempre, mesmo depois de removida do arquivo atual.
+          <span class="aprendi__conceito">saída de LLM como contrato tipado</span>
+          A resposta do modelo volta validada em Pydantic. Prompt sem schema quebra em
+          silêncio: o texto parece certo e o campo veio com outro nome.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">dinheiro não é float</span>
+          Parcelar 100 em 3 e somar de volta tem que dar 100. A distribuição de centavos
+          é uma regra que alguém precisa escrever — ela não aparece sozinha.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">competência não é a data da compra</span>
+          Em qual fatura a parcela cai depende do fechamento do cartão. Modelar isso
+          errado dá um sistema que fecha a conta e mente sobre o mês.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">deploy com segredo fora da imagem</span>
+          A chave da IA vive no Secret Manager e só a service account do serviço lê. No
+          Cloud Run não existe arquivo de credencial: o serviço usa a identidade dele.
+        </div>
+
+        <div class="aprendi__item">
+          <span class="aprendi__conceito">autorizar não é autenticar</span>
+          Login do Google diz quem é a pessoa. Quem pode entrar é outra pergunta, e ela
+          precisa de uma lista — senão "autenticado" significa qualquer um com conta
+          Google.
         </div>
 
       </div>
 
       <h2>Próximo passo</h2>
+      <p>
+        Usar todo dia por algumas semanas antes de escrever mais código. Registro real é
+        o único teste que encontra o ajuste que importa — e a fila atual já tem nome:
+        terminar a leitura da nota, devolver o status de cada mês no simulador e um botão
+        de marcar fatura como paga.
+      </p>
 
       <p style="margin-top:2.5rem">
         <a href="index.html#contato" class="btn btn--primario">Falar sobre IA aplicada</a>
